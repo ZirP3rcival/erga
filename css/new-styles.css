@@ -137,3 +137,19 @@ footer {
 .btn-primary {
     color: #000;
 }
+
+#mobile-nav {
+	background: #fff!important;
+}
+
+@media (max-width: 960px)
+{
+.ticker-btn {
+     display: block!important; 
+}
+
+.popul {
+	padding: 5px!important;
+    background: #fff!important;
+	}
+}
