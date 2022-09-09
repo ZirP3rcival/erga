@@ -142,6 +142,10 @@ footer {
 	background: #fff!important;
 }
 
+#mobile-body-overly {
+    background: rgb(255 255 255 / 80%)!important;
+}
+
 @media (max-width: 960px)
 {
 .ticker-btn {
