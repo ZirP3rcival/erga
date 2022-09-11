@@ -146,8 +146,21 @@ footer {
     background: rgb(255 255 255 / 80%)!important;
 }
 
-@media (max-width: 960px)
+.modal-header {
+	background: #5C81F0;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
+
+@media (max-width: 767px)  /* 960px*/
 {
+.modwidth {
+    width: 95%!important;
+}	
+	
 .ticker-btn {
      display: block!important; 
 }
