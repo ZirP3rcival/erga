@@ -46,6 +46,16 @@
 <script>
 $(document).ready(function(){
 
+$(document).on("click","#signup",function() {
+	$('#content').empty();
+	$("#content").load('register.php');
+	$('.modwidth').css('width','35%');
+	$('.modcap').empty();
+	$(".modcap").append('Register New Account');
+	$('#POPMODAL').modal('show');  
+});	
+
+	
 $(document).on("click","#login, #lgbtn",function() {
 	$('#content').empty();
 	$("#content").load('login.php');
