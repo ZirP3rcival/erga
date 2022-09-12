@@ -24,7 +24,7 @@
 	}	
 </style>	
 <div class="col-lg-12" style="padding: 0px;">
-        <form action="studentrecordcontroller.php?prc=S" method="post" id="adminpro-form" class="adminpro-form" enctype="multipart/form-data" role="form">
+        <form action="accountcontroller.php?prc=S" method="post" id="adminpro-form" class="adminpro-form" enctype="multipart/form-data" role="form">
             <div class="login-bg" style="border-radius: 15px;">
                 <div class="row rmargin">
                     <div class="col-lg-12">
