@@ -22,6 +22,8 @@
 .rmargin {
 		margin: 10px 0px;
 	}	
+	
+.namecap { text-transform: capitalize; }	
 </style>	
 <div class="col-lg-12" style="padding: 0px;">
         <form action="accountcontroller.php?prc=S" method="post" id="adminpro-form" class="adminpro-form" enctype="multipart/form-data" role="form">
@@ -34,7 +36,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="login-input-area register-mg-rt">
-                             <input class="form-control"  type="text" id="lnme" name="lnme" maxlength="30" />
+                             <input class="form-control namecap"  type="text" id="lnme" name="lnme" maxlength="30" />
                             <i class="fa fa-user login-user"></i>
                         </div>
                     </div>
@@ -47,7 +49,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="login-input-area register-mg-rt">
-                             <input class="form-control"  type="text" id="mnme" name="mnme" maxlength="30" />
+                             <input class="form-control namecap" type="text" id="mnme" name="mnme" maxlength="30" />
                             <i class="fa fa-user login-user"></i>
                         </div>
                     </div>
@@ -60,7 +62,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="login-input-area register-mg-rt">
-                             <input class="form-control"  type="text" id="fnme" name="fnme" maxlength="30" />
+                             <input class="form-control namecap" type="text" id="fnme" name="fnme" maxlength="30" />
                             <i class="fa fa-user login-user"></i>
                         </div>
                     </div>
@@ -86,7 +88,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="login-input-area register-mg-rt">
-                             <input class="form-control"  type="number" id="cno" name="cno" maxlength="11" />
+                             <input class="form-control" type="number" id="cno" name="cno" maxlength="11" />
                             <i class="fa fa-mobile login-user"></i>
                         </div>
                     </div>
