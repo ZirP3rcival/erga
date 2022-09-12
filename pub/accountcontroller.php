@@ -26,7 +26,7 @@ $T5 = mysqli_real_escape_string($con,$_POST['eadd']);
 
 if ($prc=='S') {			
 	
-$sqldata = mysqli_query($con,"SELECT eadd, cno FROM ft2_users_account WHERE (eadd like '%$T5%' OR cno like '%$T4%')");	
+$sqldata = mysqli_query($con,"SELECT eadd, cno FROM erga_users_account WHERE (eadd like '%$T5%' OR cno like '%$T4%')");	
 $count=mysqli_num_rows($sqldata );
 
 if($count>0)
@@ -36,7 +36,7 @@ if($count>0)
 		exit;
 	}	
 	
-$sql="INSERT INTO ft2_users_account(lnme, fnme, mnme, eadd, cno, alyas, actv, typ, usr, pwd) VALUES ('$T0','$T1','$T2','$T5','$T4','$T3','Y','STUDENT','$T5',MD5('$T4'))";  echo $sql;
+$sql="INSERT INTO erga_users_account(lnme, fnme, mnme, eadd, cno, alyas, actv, typ, usr, pwd) VALUES ('$T0','$T1','$T2','$T5','$T4','$T3','Y','STUDENT','$T5',MD5('$T4'))";  echo $sql;
  if (!mysqli_query($con,$sql))
   {  
 	$_SESSION['errmsg']='Error Saving New Student Account Record!!!'; 
@@ -52,7 +52,7 @@ $sql="INSERT INTO ft2_users_account(lnme, fnme, mnme, eadd, cno, alyas, actv, ty
 }
 
 if ($prc=='D') {			
-$sql="DELETE FROM ft2_users_account WHERE id='$id'";  
+$sql="DELETE FROM erga_users_account WHERE id='$id'";  
  if (!mysqli_query($con,$sql))
   {  
 	$_SESSION['errmsg']='Error Deleting Student Record!!!'; 
@@ -72,7 +72,7 @@ $T1 = mysqli_real_escape_string($con,$_POST['eadd']);
 $T2 = mysqli_real_escape_string($con,$_POST['sqs']);
 $T3 = mysqli_real_escape_string($con,$_POST['sqa']);	
 	
-$sql=mysqli_query($con,"SELECT id, eadd, sqt, sqa FROM ft2_users_account WHERE eadd='$T1' AND sqt='$T2' AND sqa='$T3'");  
+$sql=mysqli_query($con,"SELECT id, eadd, sqt, sqa FROM erga_users_account WHERE eadd='$T1' AND sqt='$T2' AND sqa='$T3'");  
 $ct=mysqli_num_rows($sql);
 	
 while($r = mysqli_fetch_assoc($sql)) 
@@ -88,7 +88,7 @@ if($ct==0)
    {
 	 $otp=randomKey(6);  
 	 $pwd=MD5($otp); 
-	 $sql0 = mysqli_query($con, "UPDATE ft2_users_account SET usr='$T1', pwd='$pwd' WHERE id='$id'");
+	 $sql0 = mysqli_query($con, "UPDATE erga_users_account SET usr='$T1', pwd='$pwd' WHERE id='$id'");
 	 $_SESSION['errmsg']='Account Recovery Successfull!!!<br><br>Please Login using this details:<br> Username: [Email Address]<br>Password: '.$otp; 
      header("location:index.php?page=login");
      exit;
