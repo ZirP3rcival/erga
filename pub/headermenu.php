@@ -6,7 +6,7 @@ error_reporting (E_ALL ^ E_NOTICE);
 
 $id=$_SESSION['id'];
 if($id!='') {
-$sqlay="SELECT id, eadd, sqt, sqa, usr, lnme, mnme, fnme, cno, ploc, thm1 FROM erga_users_account WHERE id='$id'"; 
+$sqlay="SELECT id, eadd, sqt, sqa, usr, lnme, mnme, fnme, cno, ploc, thm1, thm2 FROM erga_users_account WHERE id='$id'"; 
 
 $sqler = $con->query($sqlay);	
 while($r = mysqli_fetch_assoc($sqler)) {
@@ -23,17 +23,20 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	$cno= $r['cno'];
 	
 	$thm1= $r['thm1'];
+	$thm2= $r['thm2'];
 }
 
-$cssString = '#header.header-student { background: rgb(82 122 239 / 90%)!important; transition: all 0.5s; }';
+$cssString = '#header.header-student { background: '.$thm1.'!important; opacity :0.9!important; transition: all 0.5s; }';
+$cssString.= '.ticker-btn { background: '.$thm2.'!important; }';
+$cssString.= '.footer-area { background: '.$thm1.'!important; opacity :0.9!important; }';
+$cssString.= '.banner-content .form-wrap { background-color: '.$thm2.'!important; }';
+?>
 
-file_put_contents('../css/custom-style.css', $cssString);
+<style>
+<?=$cssString;?>	
+</style>
 
-if($thm1!='') { ?>
-	<link rel='stylesheet' href="../css/custom-style.css">
 <?php }
-}
-
 $stype=$_SESSION['account'];
 if($stype=='') {
 ?>
