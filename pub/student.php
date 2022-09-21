@@ -78,31 +78,12 @@ error_reporting (E_ALL ^ E_NOTICE);
 <script>
 $(document).ready(function(){
 
-$(document).on("click","#signup",function() {
+$(document).on("click","#my_account",function() {
 	$('#content').empty();
-	$("#content").load('register.php');
-	$('.modwidth').css('width','35%');
+	$("#content").load('my_account.php');
+	$('.modwidth').css('width','75%');
 	$('.modcap').empty();
-	$(".modcap").append('Register New Account');
-	$('#POPMODAL').modal('show');  
-});	
-
-	
-$(document).on("click","#login, #lgbtn",function() {
-	$('#content').empty();
-	$("#content").load('login.php');
-	$('.modwidth').css('width','35%');
-	$('.modcap').empty();
-	$(".modcap").append('User Verification');
-	$('#POPMODAL').modal('show');  
-});	
-
-$(document).on("click","#logprob",function() {
-	$('#content').empty();
-	$("#content").load('recover.php');
-	$('.modwidth').css('width','35%');
-	$('.modcap').empty();
-	$(".modcap").append('Account Recovery');
+	$(".modcap").append('User Account Information');
 	$('#POPMODAL').modal('show');  
 });	
 	

@@ -1,0 +1,4 @@
+CPANEL
+Domain: pnpsis.org/cpanel
+Username: pnpsis
+Password: 1{RR$vDDbt45

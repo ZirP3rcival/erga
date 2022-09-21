@@ -1,7 +1,38 @@
+<?php
+ob_start();
+include ('connection.php');
+session_start(); 
+error_reporting (E_ALL ^ E_NOTICE); 
+
+$id=$_SESSION['id'];
+$sqlay="SELECT id, eadd, sqt, sqa, usr, lnme, mnme, fnme, cno, ploc, thm1 FROM erga_users_account WHERE id='$id'"; 
+
+$sqler = $con->query($sqlay);	
+while($r = mysqli_fetch_assoc($sqler)) {
+	$photo='data:image/png;base64,'.''.$r['ploc'];
+	$ploc = $r['ploc'];
+	$eadd = $r['eadd'];
+	$sqt = $r['sqt'];
+	$sqa = $r['sqa'];
+	$usr = $r['usr'];
+	$pwd = $_SESSION['pwd'];
+	$lnme = $r['lnme'];
+	$mnme = $r['mnme'];
+	$fnme = $r['fnme'];
+	$cno= $r['cno'];
+	
+	$thm1= $r['thm1'];
+} 
+?>
+
 <style>
 .form-control  {
     color: #0B0237;
 	font-weight: 600;
+	}
+	
+.modal-dialog {
+	max-width: 85%; }
 }	
 </style>
 <div class="content-inner-all">
@@ -12,21 +43,12 @@
             <div class="row rowflx">
 <div class="col-lg-4 col-xs-12 my-acct-box mg-tb-31">
 	<div class="card">
-		  <div class="card-block card-top login-fm my-acct-title">
-			 <h4 class="text-white card-title" style="margin-bottom: 0px;">
-			 <span class="fa fa-lock" style="margin-right: 15px; font-size: 2em;"></span>User Login Information</h4>
-			 <h6 class="card-subtitle text-white m-b-0 op-5" style="padding-left: 40px; margin-bottom: 0px;">Please Accomplish the following</h6>
-		  </div>	  
 			<div class="card-block">
 				<div class="message-box contact-box">
 					<div class="row" style="margin: 15px 0px 20px;">          
 						<div class="col-xs-12 col-md-12" style="padding: 0px;">
 						   <div class="clearfix"></div>
-						<div class="col-xs-12 col-md-12"><span class="mf" style="float:left; margin-right:10px;">Email Address : </span></div>
-						<div class="col-xs-12 col-md-12"><input type="email" maxlength="60" class="form-control" style="width:100%; float:left;" id="peadd" name="peadd" required placeholder="Input Email Address" value="<?=$eadd?>" onblur="checkPEmail(this.value)"></div>
-							 <div class="clearfix"></div>
-
-						<div class="col-xs-12 col-md-12" style="margin-top:10px;"><span class="mf" style="float:left; margin-right:10px;">Security Question : </span></div>
+						<div class="col-xs-12 col-md-12" style="margin-top:0px;"><span class="mf" style="float:left; margin-right:10px;">Security Question : <?=$page?></span></div>
 						<div class="col-xs-12 col-md-12">
 						<select name="pusqs" required class="form-control" id="pusqs" style="display: inline-block; position:inherit; width:100%;">
 								  <option value="What is the first name of your favorite uncle?" >What is the first name of your favorite uncle?</option>
@@ -114,9 +136,6 @@
 						<div class="col-xs-12 col-md-5" id="nme_status" style="font-size:11px; word-wrap:normal; font-weight:bold;">
 							<input type="color" name="thm1" id="thm1" value="<?= htmlspecialchars($thm1) ?>">
 						</div>
-						<div class="col-xs-12 col-md-5" id="nme_status" style="font-size:11px; word-wrap:normal; font-weight:bold;">
-							<input type="color" name="thm2" id="thm2" value="<?= htmlspecialchars($thm2) ?>">
-						</div>
 						</div>							
 						</div>
 					</div>            
@@ -126,11 +145,6 @@
 </div>  
 <div class="col-lg-4 col-xs-12 my-acct-box mg-tb-31">
 	<div class="card">
-		  <div class="card-block card-top login-fm my-acct-title">
-			 <h4 class="text-white card-title" style="margin-bottom: 0px;">
-			 <span class="fa fa-user" style="margin-right: 15px; font-size: 2em;"></span>Personal Information</h4>
-			 <h6 class="card-subtitle text-white m-b-0 op-5" style="padding-left: 40px; margin-bottom: 0px;">Please Accomplish the following</h6>
-		  </div>
 			<div class="card-block">
 				<div class="message-box contact-box">
 					<div class="row" style="margin: 15px 0px 20px;">          
@@ -223,7 +237,7 @@
 							<script type="text/javascript">
 							function cnolength(input,textbox,e) {
 							if (input.length < 13) {
-								var bb = bootbox.alert({ message: "Contact Number Length Invalid!!!",title: "<span style='color:#fff;'>Notification :</span>",
+								var bb = bootbox.alert({ message: "Contact Number Length Invalid!!!",title: "<span style='color:#5B84F3;'>e-RGA Alert :</span>",
 								   size: 'small'});
 								   bb.find('.modal-title').css({'float': 'left','margin-top':'10px'});
 								   bb.find('.close').css({'display': 'none'});
@@ -243,6 +257,10 @@
 							}	
 							}
 							</script>
+							<div class="col-xs-12 col-md-12" style="margin-top:10px;"><span class="mf" style="float:left; margin-right:10px;">Email Address : </span></div>
+							<div class="col-xs-12 col-md-12"><input type="email" maxlength="60" class="form-control" style="width:100%; float:left;" id="peadd" name="peadd" required placeholder="Input Email Address" value="<?=$eadd?>" onblur="checkPEmail(this.value)"></div>
+								 <div class="clearfix"></div>	
+								 						
 							<div class="col-xs-12 col-md-5" style="margin-top:10px;"><span class="mf" style="float:left; margin-right:10px;">Contact No. : </span></div>
 							<div class="col-xs-12 col-md-7" style="float: right;margin-top:10px;">
 							<input name="pucno" type="text" class="form-control" id="pucno" placeholder="0000-000-0000" required style="width:100%; float:left;" maxlength="13" onBlur="return cnolength(this.value,this,event)" onKeyPress="return masking(this.value,this,event);" value="<?=$cno?>"></div>
@@ -254,7 +272,7 @@
 									var confirmPassword = document.getElementById("C_Password").value;
 									if (password != confirmPassword) {
 
-									var bb = bootbox.alert({ message: "<?=$errmsg ?>",title: "<span style='color:#fff;'>Notification :</span>",
+									var bb = bootbox.alert({ message: "<?=$errmsg ?>",title: "<span style='color:#5B84F3;'>e-RGA Alert :</span>",
 								   size: 'small'});
 								   bb.find('.modal-title').css({'float': 'left','margin-top':'10px'});
 								   bb.find('.close').css({'display': 'none'});
@@ -275,37 +293,7 @@
 									return true;
 								}
 							</script>
-						</div>
-<?php
-$acct=$_SESSION['account'];
-if($acct=='STUDENT') {	
-?>						
-						<div class="col-xs-12 col-md-12" style="padding: 20px 20px 0px;">
-							<div class="form-group">
-							   <div class="col-xs-12 col-md-5">Grade Level : </div>
-							   <div class="col-xs-12 col-md-7">
-							   <select class="form-control" name="zgrd" id="zgrd">
-							 <option value="">- Select Grade -</option>
-							<?php 
-							$gsql = mysqli_query($con,"SELECT * FROM `ft2_grade_data` order by grd ASC");
-							  while($rg = mysqli_fetch_assoc($gsql))
-							   {   ?>        
-								  <option value="<?=$rg['id'];?>" <?=($grde == $rg['id'] ? 'selected' : '');?>><?=$rg['grd'];?></option> 
-							<?php } ?>      
-							  </select>
-							  </div>
-							</div>                                          
-
-							<div class="form-group">
-							   <div class="col-xs-12 col-md-5">Section Name :</div>
-							   <div class="col-xs-12 col-md-7">
-							   <select class="form-control" name="zsec" id="zsec">
-
-							  </select>
-							  </div>
-							</div>
-						</div>
-<?php  }  ?>						
+						</div>					
 					</div>            
 				</div>
 			</div>
@@ -313,16 +301,11 @@ if($acct=='STUDENT') {
 </div>            
 <div class="col-lg-4 col-xs-12 my-acct-box mg-tb-31" style="padding-bottom: 15px;">
 	<div class="card">
-		  <div class="card-block card-top login-fm my-acct-title">
-			 <h4 class="text-white card-title" style="margin-bottom: 0px;">
-			 <span class="fa fa-picture-o" style="margin-right: 15px; font-size: 2em;"></span>Profile Picture Uploader</h4>
-			 <h6 class="card-subtitle text-white m-b-0 op-5" style="padding-left: 40px; margin-bottom: 0px;">Please Accomplish the following</h6>
-		  </div>
 <div class="card-block">                              
 <div class="row" style="margin: 15px 0px 20px;">
 <div class="col-lg-12 col-xs-12 message-box contact-box"><h5>Current Profle Picture : </h5></div>
 <div class="col-xs-12 col-md-12" style="display:table-cell; vertical-align:middle; text-align:center">
-<img id="img" src="<?=$photo?>" style="width:50%; border-left:1px solid #fff; border-top:1px solid #fff; border-right:2px solid #000; border-bottom:2px solid #000;"  onerror="this.src='../img/missing.png'"  />
+<img id="img" src="<?=$photo?>" style="width:50%; border-left:1px solid #fff; border-top:1px solid #fff; border-right:2px solid #000; border-bottom:2px solid #000;"  onerror="this.src='../img/missing.jpg'"  />
 </div>
 
 <div class="form-group" style="padding:35px 10px 10px 10px; margin: 0px;">
@@ -336,7 +319,7 @@ if($acct=='STUDENT') {
     <input style="visibility: hidden; position: absolute;" id="files" class="form-control" type="file" name="files"  accept="image/*" capture="camera">
 </div>   
 <div style="float: right;" class="col-xs-6 col-md-6">
-	<button type="submit" class="btn btn-success" id="unwsuba" form="frmUP" onclick="return Validate()"/>Update Account</button>
+	<button type="submit" class="btn btn-success" id="unwsuba" form="frmUP" onclick="return Validate()">Update Account</button>
 </div>                                                                  
 
 <script type="text/javascript">
@@ -382,48 +365,3 @@ $("#files").change(function(){
         }
         } 
 </script> 
-
-<script> 	  
-$(document).ready( function() { 
-	
-$('#zsec').append('<option value="<?=$sec?>" selected><?=$sct?></option>'); 	
-	
-$(document).on("change","#zgrd",function() {	
-  var id = document.getElementById("zgrd").value;  	
-  $.ajax({
-    type: 'POST',
-    url: 'useraccountcontroller.php?prc=C',
-    dataType: 'JSON',
-    data: { id:id }, 
-    success: function (data) {
-	     $('#zsec').empty();	
-	     $('#zsec').append('<option value="" >- Select Section-</option> '); 
-	     $.each(data, function(i,trk){
-         $('#zsec').append('<option value="' + trk.id + '">' + trk.sect + '</option>');  
-//		 var cors='<=$sec?>';	
-//         if(cors==trk.sect) { $('#Course-Track option[value="'+cors+'"').attr('selected','selected'); }	 	 
-	});		 
-  }   
-  });		
-});
-	
-$(document).on("click","#zgrd",function() {	
-  var id = document.getElementById("zgrd").value;  	
-  $.ajax({
-    type: 'POST',
-    url: 'useraccountcontroller.php?prc=C',
-    dataType: 'JSON',
-    data: { id:id }, 
-    success: function (data) {
-	     $('#zsec').empty();	
-	     $('#zsec').append('<option value="" >- Select Section-</option> '); 
-	     $.each(data, function(i,trk){
-         $('#zsec').append('<option value="' + trk.id + '">' + trk.sect + '</option>');  
-//		 var cors='<=$sec?>';	
-//         if(cors==trk.sect) { $('#Course-Track option[value="'+cors+'"').attr('selected','selected'); }	 	 
-	});		 
-  }   
-  });		
-});	
-});
-</script>	
