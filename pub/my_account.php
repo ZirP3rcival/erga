@@ -5,7 +5,7 @@ session_start();
 error_reporting (E_ALL ^ E_NOTICE); 
 
 $id=$_SESSION['id'];
-$sqlay="SELECT id, eadd, sqt, sqa, usr, lnme, mnme, fnme, cno, ploc, thm1 FROM erga_users_account WHERE id='$id'"; 
+$sqlay="SELECT id, eadd, sqt, sqa, usr, lnme, mnme, fnme, cno, ploc, thm1, thm2 FROM erga_users_account WHERE id='$id'"; 
 
 $sqler = $con->query($sqlay);	
 while($r = mysqli_fetch_assoc($sqler)) {
@@ -22,6 +22,7 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	$cno= $r['cno'];
 	
 	$thm1= $r['thm1'];
+	$thm2= $r['thm2'];
 } 
 ?>
 
@@ -130,13 +131,19 @@ while($r = mysqli_fetch_assoc($sqler)) {
 						<input type="password" required maxlength="25" class="form-control" style="width:100%; float:left;" id="D_Password" name="ppwd" placeholder="Password" value="<?=$pwd?>"/>
 							</div><div class="clearfix"></div><div class="col-xs-12 col-md-12" id="Ppass-info" style="padding-left: 20px; font-size:11px; word-wrap:normal;"></div>
 							
-
 						<div class="col-xs-12 col-md-4" style="margin-top:10px;"><span class="mf" style="float:left; margin-right:10px;">Theme Color : </span></div>
 						<div class="col-xs-12 col-md-8" style="float: right; margin-top:10px;">
 						<div class="col-xs-12 col-md-5" id="nme_status" style="font-size:11px; word-wrap:normal; font-weight:bold;">
 							<input type="color" name="thm1" id="thm1" value="<?= htmlspecialchars($thm1) ?>">
 						</div>
-						</div>							
+						</div>
+						<div class="col-xs-12 col-md-4" style="margin-top:10px;"><span class="mf" style="float:left; margin-right:10px;">Theme Color : </span></div>
+						<div class="col-xs-12 col-md-8" style="float: right; margin-top:10px;">
+						<div class="col-xs-12 col-md-5" id="nme_status" style="font-size:11px; word-wrap:normal; font-weight:bold;">
+							<input type="color" name="thm2" id="thm2" value="<?= htmlspecialchars($thm2) ?>">
+						</div>
+						</div>	
+						<div class="clearfix"></div>						
 						</div>
 					</div>            
 				</div>
