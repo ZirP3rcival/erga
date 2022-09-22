@@ -48,13 +48,13 @@ if(($rs['usr']==$username) && ($rs['pwd']==$epassword))
 		$sqlup = mysqli_query($con,"UPDATE `erga_users_account` SET login='Y' WHERE id='$id'");
 		
 		if($acct=='ADMIN'){
-			$_SESSION['account'] = $acct;	
+			$_SESSION['accttype'] = $acct;	
 			header("location:admin"); }
 		else if($acct=='FACULTY'){
-			$_SESSION['account'] = $acct;	
+			$_SESSION['accttype'] = $acct;	
 			header("location:faculty"); }
 		else if($acct=='STUDENT'){
-			$_SESSION['account'] = $acct;		
+			$_SESSION['accttype'] = $acct;		
 			$_SESSION['grde']=$rs['grde'];  	
 			$_SESSION['sec']=$rs['sec'];  
 			header("location:student"); }

@@ -8,7 +8,7 @@ error_reporting (E_ALL ^ E_NOTICE);
 
 //destroy all session
 unset($_SESSION['id']);
-unset($_SESSION['account']);
+unset($_SESSION['accttype']);
 $_SESSION['errmsg'] ="Account Logout Successfully!!!";
 header("location:index.php");
 exit;

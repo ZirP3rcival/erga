@@ -4,7 +4,7 @@ include ('connection.php');
 session_start(); 
 error_reporting (E_ALL ^ E_NOTICE); 
 @$a = $xyz / 0; // no error 
-$page=strtolower($_SESSION['account']);
+$page=strtolower($_SESSION['accttype']);
 $id=$_SESSION['id'];
 /*********************************  Update User Record ********************************/
 $T0 = mysqli_real_escape_string($con,$_POST['pulnme']);

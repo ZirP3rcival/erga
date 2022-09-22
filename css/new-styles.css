@@ -155,6 +155,12 @@ p {
     margin-bottom: 0rem;
 }
 
+.sidebar .single-slidebar {
+    background-color: #f9f9ff;
+    padding: 20px!important;
+    margin-bottom: 30px;
+}
+
 @media (max-width: 767px)  /* 960px*/
 {
 .modwidth {

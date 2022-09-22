@@ -1,4 +1,3 @@
-<div class="col-lg-8 post-list">
 	<div class="single-post d-flex flex-row">
 		<div class="thumb">
 			<img src="../img/post.png" alt="">
@@ -79,4 +78,3 @@
 			</p>
 		</div>
 	</div>
-</div>

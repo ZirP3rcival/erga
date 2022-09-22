@@ -20,9 +20,13 @@ error_reporting (E_ALL ^ E_NOTICE);
 				<div class="container">
 					<h1 class="text-white lpage" style="margin-bottom: 30px;">Random Information</h1>				
 					<div class="row justify-content-center d-flex">
-<?php include_once('randomtopic.php');?>  						
-<?php include_once('infogallery.php');?>  						
-<?php include_once('infovideo.php');?>  
+<div class="col-lg-8 post-list">					
+	<?php include_once('randomtopic.php');?>  		
+</div>			
+<div class="col-lg-4 sidebar">	
+	<?php include_once('infogallery.php');?>  						
+	<?php include_once('infovideo.php');?>  
+</div> 
 						</div>
 					</div>
 				</div>	

@@ -64,8 +64,8 @@
             <div class="row rmargin">
 				<div class="col-lg-12">
 					<div class="login-button-pro logbtn">
-						<button type="submit" class="btn btn-success">Log in</button>
-						<button type="button" class="btn btn-primary" id="logprob">Log in Problem</button>
+						<button type="submit" class="btn btn-success" style="float: right;">Log in</button>
+						<button type="button" class="btn btn-primary" id="logprob" style="float: left;">Log in Problem</button>
 					</div>
 				</div>
 			</div>
