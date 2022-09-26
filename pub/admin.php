@@ -82,7 +82,7 @@ error_reporting (E_ALL ^ E_NOTICE);
 <script>
 $(document).ready(function(){
 
-$(document).on("click","#my_account",function() {
+$(document).on("click","#my_account,.usrimg",function() {
 	$('#content').empty();
 	$("#content").load('my_account.php');
 	$('.modwidth').css('width','75%');

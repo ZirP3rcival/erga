@@ -22,6 +22,8 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	$fnme = $r['fnme'];
 	$cno= $r['cno'];
 	
+	$fname=	$fnme.' '.$mnme.' '.$lnme.'<br>'.$stype.' Account';
+	
 	$thm1= $r['thm1'];
 	$thm2= $r['thm2'];
 }
@@ -38,6 +40,11 @@ $cssString.= '.modal-header { background: '.$thm1.'; }';
 
 <style>
 <?=$cssString;?>	
+.myacct {   
+	color: #fff; 
+	text-shadow: 0px 0px 10px #fff; 
+	text-align: center;
+	}	
 </style>
 
 <?php 
@@ -82,11 +89,12 @@ if($stype=='') {
 					<li><a class="ticker-btn" href="#">Contents Module</a></li>
 	          </ul>
 	        </li>
-	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>
+<!--	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>-->
 	        <li><a class="ticker-btn" href="logout" id="logout">Logout</a></li>	 
 	        <li> 
-	        	<img id="img" src="<?=$photo?>" style="width:75px; border-radius: 15px; border: 3px solid #fff;"  onerror="this.src='../img/missing.jpg'"  />    
-	        </li> 	 			  
+	        	<img class="usrimg" id="img" src="<?=$photo?>" style="width:75px; border-radius: 15px; border: 3px solid #fff; cursor: pointer;"  onerror="this.src='../img/missing.jpg'" title="Update My Account">  
+	        </li> 	 	
+	        <li class="myacct"><?=$fname?></li>	 		  
 	      </ul>
 	    </nav><!-- #nav-menu-container -->		    		
   	</div>
@@ -103,11 +111,12 @@ if($stype=='') {
 	      <ul class="nav-menu">
 	        <li class="menu-active"><a class="ticker-btn" href="#">Home</a></li>
 			<li><a class="ticker-btn" href="#" id="user_account">System Records</a></li>
-	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>
+<!--	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>-->
 	        <li><a class="ticker-btn" href="logout" id="logout">Logout</a></li>		 
 	        <li> 
-	        	<img id="img" src="<?=$photo?>" style="width:75px; border-radius: 15px; border: 3px solid #fff;"  onerror="this.src='../img/missing.jpg'"  />    
-	        </li>         	        
+	        	<img class="usrimg" id="img" src="<?=$photo?>" style="width:75px; border-radius: 15px; border: 3px solid #fff; cursor: pointer;"  onerror="this.src='../img/missing.jpg'" title="Update My Account">  
+	        </li> 	 	
+	        <li class="myacct"><?=$fname?></li>	 	        
 	      </ul>
 	    </nav><!-- #nav-menu-container -->		    		
   	</div>
@@ -130,11 +139,12 @@ if($stype=='') {
 								<li><a class="ticker-btn" href="search.html">Statistics</a></li>
 	          </ul>
 	        </li>
-	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>
+<!--	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>-->
 	        <li><a class="ticker-btn" href="logout" id="logout">Logout</a></li>		 
 	        <li> 
-	        	<img id="img" src="<?=$photo?>" style="width:75px; border-radius: 15px; border: 3px solid #fff;"  onerror="this.src='../img/missing.jpg'"  />    
-	        </li>         	        
+	        	<img class="usrimg" id="img" src="<?=$photo?>" style="width:75px; border-radius: 15px; border: 3px solid #fff; cursor: pointer;"  onerror="this.src='../img/missing.jpg'" title="Update My Account">  
+	        </li> 	 	
+	        <li class="myacct"><?=$fname?></li>	
 	      </ul>
 	    </nav><!-- #nav-menu-container -->		    		
   	</div>

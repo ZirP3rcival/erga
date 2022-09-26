@@ -167,6 +167,11 @@ p {
     width: 95%!important;
 }	
 	
+.usrimg {
+	margin-top: 15px;
+    width: 100%!important;
+}		
+	
 .ticker-btn {
      display: block!important; 
 }
