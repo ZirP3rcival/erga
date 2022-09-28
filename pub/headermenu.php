@@ -62,8 +62,13 @@ if($stype=='') {
 <!--	        <li><a class="ticker-btn" href="about-us.html">About Us</a></li>-->
 	        <li class="menu-has-children"><a class="ticker-btn" href="#">Category</a>
 	          <ul class="popul">
-								<li><a class="ticker-btn" href="elements.html">Research Method</a></li>
-								<li><a class="ticker-btn" href="search.html">Statistics</a></li>
+<?PHP
+$sqlay="SELECT * FROM erga_category_list ORDER BY category ASC"; 
+$sqler = $con->query($sqlay);	
+while($r = mysqli_fetch_assoc($sqler)) {				
+?>	          
+	<li><a class="ticker-btn catlst" href="#"><?=$r['category']?></a></li>
+<?php } ?>
 	          </ul>
 	        </li>
 	        <li><a class="ticker-btn" href="#" id="signup">Signup</a></li>
@@ -135,8 +140,13 @@ if($stype=='') {
 <!--	        <li><a class="ticker-btn" href="about-us.html">About Us</a></li>-->
 	        <li class="menu-has-children"><a class="ticker-btn" href="#">Category</a>
 	          <ul class="popul">
-								<li><a class="ticker-btn" href="elements.html">Research Method</a></li>
-								<li><a class="ticker-btn" href="search.html">Statistics</a></li>
+<?PHP
+$sqlay="SELECT * FROM erga_category_list ORDER BY category ASC"; 
+$sqler = $con->query($sqlay);	
+while($r = mysqli_fetch_assoc($sqler)) {				
+?>	          
+	<li><a class="ticker-btn catlst" href="#"><?=$r['category']?></a></li>
+<?php } ?>
 	          </ul>
 	        </li>
 <!--	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>-->
