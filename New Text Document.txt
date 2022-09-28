@@ -1,0 +1,3 @@
+https://marketplace.visualstudio.com/items?itemName=cyberbiont.vscode-profiles
+
+https://www.freecodecamp.org/news/how-to-create-code-profiles-in-vscode/

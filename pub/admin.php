@@ -3,6 +3,18 @@ ob_start();
 include ('connection.php');
 session_start(); 
 error_reporting (E_ALL ^ E_NOTICE); 
+
+$id=$_SESSION['id'];
+if ($id=='')
+{
+ $_SESSION['errmsg'] ="Please Login to Gain Access!!!!";
+ header("location:index.php");
+}
+
+$page = $_REQUEST['page'];
+if($page=='') { $page='dashboard_admin'; }
+$wp = $page.'.php';
+
 ?>
 <!DOCTYPE html>
 	<html lang="zxx" class="no-js">
@@ -12,26 +24,7 @@ error_reporting (E_ALL ^ E_NOTICE);
 <?php include_once('headermenu.php');?> 			  
 			<!-- #header -->
 
-			<!-- start banner Area -->
-<?php include_once('topicsearch.php');?>  				
-			<!-- End banner Area -->
-			<!-- Start post Area -->
-			<section class="post-area section-gap">
-				<div class="container">
-					<h1 class="text-white lpage" style="margin-bottom: 30px;">Random Information</h1>				
-					<div class="row justify-content-center d-flex">
-<div class="col-lg-8 post-list">					
-	<?php include_once('randomtopic.php');?>  		
-</div>			
-<div class="col-lg-4 sidebar">	
-	<?php include_once('infogallery.php');?>  						
-	<?php include_once('infovideo.php');?>  
-</div>					
-						</div>
-					</div>
-				</div>	
-			</section>
-			<!-- End post Area -->		
+<?php include_once($wp);?> 	
 <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>		
 <?php include_once('landingfooter.php');?>  			
@@ -90,6 +83,15 @@ $(document).on("click","#my_account,.usrimg",function() {
 	$(".modcap").append('User Account Information');
 	$('#POPMODAL').modal('show');  
 });	
+	
+$(document).on("click","#conrec",function() {
+	$('#content').empty();
+	$("#content").load('glossary_record.php');
+	$('.modwidth').css('width','75%');
+	$('.modcap').empty();
+	$(".modcap").append('System Glossary Records Module');
+	$('#POPMODAL').modal('show');  
+});		
 	
 });
 </script>
