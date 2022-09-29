@@ -3,6 +3,8 @@ ob_start();
 include ('connection.php');
 session_start(); 
 error_reporting (E_ALL ^ E_NOTICE); 
+$stype=$_SESSION['accttype']; 
+
 $cid=$_POST['category'];
 
 if($cid=='') { $cid=$_REQUEST['cid']; }
@@ -84,11 +86,15 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE ftype='$cid' OR
 	<div class="row">
 	<div class="col-xs-12 col-md-9" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['title'];?></div>
     <div class="col-xs-12 col-md-3" style="padding-bottom: 0px; padding-right: 0px;">
+	 
+	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D&cid=<?=$cid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
+	 
+<?php if($stype=='FACULTY') { ?> 
+	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+<?php } ?>	 
+	 
 	 <button class="btn btn-primary fa fa-search" id="viewls" data-id="<?=$rx['id'];?>" data-title="<?=$rx['title'];?>" title="View this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
 	 
-	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
-	 
-	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
 	 </div>	 
 	 <div class="clearfix"></div>
 	 </div>
@@ -107,7 +113,55 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE ftype='$cid' OR
 	</div>	
 </section>
 
+<!-- ######################################## CREATE GRADE LEVEL RECORD ################################### -->
+<div class="modal fade" id="NGR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header login-fm" style="color:#fff;">
+       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">Create Glossary Record
+       </h4>
+      </div>   
+     <div class="modal-body">       
+<form action="glossarycontroller.php?prc=S&cid=<?=$cid?>" method="post" class="form-horizontal" id="frmcgrd" name="frmcgrd" style="margin:0px; padding:0px 12px;" role="form">
+                      <div class="form-group">
+                        <label for="username">Glossary Record Title :</label>
+                        <input name="title" type="text" class="form-control" id="title" maxlength="100" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="username">Published Link :</label>
+                        <textarea name="flink" type="text" class="form-control" id="flink" rows="5"  required></textarea>
+                      </div>                      
+</form>
+</div>
+<div class="modal-footer col-xs-12 col-md-12 login-fm" style="margin-top:0px;  color:#fff;font-size: 12px; padding: 10px 15px;">
+ <button type="button" class="btn btn-info" id="editor" name="editor" style="font-size: 12px; float: left;" form="frmcgrd"/>Create Record</button>
+ <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmcgrd"/>Submit</button>
+ <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px;">Close</button>
+</div>
+    </div>
+  </div>
+</div>
+<!-- ############################################################################################ -->
+<!-- ######################################## CREATE GRADE LEVEL RECORD ################################### -->
+<div class="modal fade" id="ULM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header login-fm" style="color:#fff;">
+       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">Update Lesson Record
+       </h4>
+      </div>   
+<div class="modal-body" id="contentx">        
 
+</div>
+<div class="modal-footer col-xs-12 col-md-12 login-fm" style="margin-top:0px;  color:#fff;font-size: 12px; padding: 10px 15px;">
+ <button type="button" class="btn btn-info" id="editor" name="editor" style="font-size: 12px;" form="frmuml"/>Create Lesson</button>
+ <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmuml"/>Update</button>
+ <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px;">Close</button>
+</div>
+    </div>
+  </div>
+</div>
+<!-- ############################################################################################ -->
 <!-- ############################################################################################ -->
 <script>
 $(document).ready(function(){

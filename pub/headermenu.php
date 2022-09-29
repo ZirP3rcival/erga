@@ -115,8 +115,7 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	    <nav id="nav-menu-container">
 	      <ul class="nav-menu">
 	        <li class="menu-active"><a class="ticker-btn" href="#">Home</a></li>
-			<li><a class="ticker-btn" href="#" id="user_account">System Records</a></li>
-<!--	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>-->
+			<li><a class="ticker-btn" href="?page=glossary_module" id="cmod">Contents Module</a></li>
 	        <li><a class="ticker-btn" href="logout" id="logout">Logout</a></li>		 
 	        <li> 
 	        	<img class="usrimg" id="img" src="<?=$photo?>" style="width:75px; border-radius: 15px; border: 3px solid #fff; cursor: pointer;"  onerror="this.src='../img/missing.jpg'" title="Update My Account">  
