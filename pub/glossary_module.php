@@ -27,7 +27,7 @@ if($cid=='') { $cid=$_REQUEST['cid']; }
 	<div class="card">
 		  <div class="card-block card-top login-fm my-acct-title">
 			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #000!important; text-align: left; padding: 15px;">
-			 <span class="fa fa-list" style="margin-right: 15px; font-size: 2em;"></span>Glossary Category</h4>
+			 <span class="fa fa-folder" style="margin-right: 15px; font-size: 2em;"></span>Glossary Category</h4>
 		  </div>	  
 <div class="card-block box" style="padding: 10px;">
 <div style="background: #FFF;"> 
@@ -60,36 +60,37 @@ if($cid=='') { $cid=$_REQUEST['cid']; }
 </div>  
 
 <div class="col-lg-8 col-xs-12 my-acct-box mg-tb-31" style="padding-bottom: 15px;">
-	<div class="card">
+	<div class="card dash-video">
 		  <div class="card-block card-top login-fm my-acct-title">
-			 <h4 class="text-white card-title" style="margin-bottom: 0px;">
-			 <span class="fa fa-book" style="margin-right: 15px; font-size: 2em;"></span>Lessons Record List			 
-			 </h4>
-			 <h6 class="card-subtitle text-white m-b-0 op-5" style="padding-left: 40px; margin-bottom: 0px;">Listahan ng mga Aralin</h6>
+			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #fff!important; text-align: left; padding: 15px;">
+			 <span class="fa fa-list" style="margin-right: 15px; font-size: 2em;"></span>Glossary Record Content</h4>
 		  </div>
   
-<div class="card-block">
-<div class="list-group" style="margin-bottom: 5px;">
+<div class="card-block" style="margin: 0px 15px;">
+<div class="list-group" style="margin-bottom: 15px;">
 <li class="list-group-item" style="font-weight: 600; font-size: 12px;">
 	<div class="row">
 		<div class="col-xs-2 col-md-12" style="padding-bottom: 0px; padding-right: 0px;">Title</div>
 		<div class="clearfix"></div>
 	</div>
-></li>
+</li>
 <?php 
-if($fgrd!='')	{
-$dsql = mysqli_query($con,"SELECT * from ft2_module_records WHERE grde = '$fgrd' AND syr = '$syr' AND fid='$fid' AND asid='$fsbj' ORDER BY title ASC");
+if($cid!='')	{
+$dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE ftype='$cid' ORDER BY title ASC");
   while($rx = mysqli_fetch_assoc($dsql))
-   { $sphoto='data:image/png;base64,'.''.$rx['ploc'];
+   { 
     ?>                                   
-<li class="list-group-item" style="padding: 2px 15px; font-size: 12px;"><div class="row">
-<div class="col-xs-10 col-md-9" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['title'];?></div>
- <a href="lessonscontroller?id=<?=$rx['id'];?>&prc=D" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger glyphicon glyphicon-trash" title="Delete this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
-  
- <button class="btn btn-warning glyphicon glyphicon-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
- 
- <button class="btn btn-primary glyphicon glyphicon-search" id="viewls" data-id="<?=$rx['id'];?>" title="View this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
- <div class="clearfix"></div></div></li>
+<li class="list-group-item" style="padding: 2px 15px; font-size: 12px; color: #000;">
+	<div class="row">
+	<div class="col-xs-10 col-md-9" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['title'];?></div>
+	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
+
+	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+
+	 <button class="btn btn-primary fa fa-search" id="viewls" data-id="<?=$rx['id'];?>" title="View this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+	 <div class="clearfix"></div>
+	 </div>
+ </li>
 
  <?php }} ?></div>   
 </div> 
@@ -108,12 +109,6 @@ $dsql = mysqli_query($con,"SELECT * from ft2_module_records WHERE grde = '$fgrd'
 <!-- ############################################################################################ -->
 <script>
 $(document).ready(function(){
-var fgrd= document.getElementById("fgrd").value;
-var fsbj= document.getElementById("fsbj").value;	
-	
-if((fgrd=='')||(fsbj=='')) { $('#cnew').prop('disabled',true); }	
-else { $('#cnew').prop('disabled',false); }	
-
 	
 $(document).on("click","#viewls",function() {
 	var id=$(this).data('id');
