@@ -80,14 +80,16 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE ftype='$cid' OR
   while($rx = mysqli_fetch_assoc($dsql))
    { 
     ?>                                   
-<li class="list-group-item" style="padding: 2px 15px; font-size: 12px; color: #000;">
+<li class="list-group-item" style="padding: 5px 15px; font-size: 14px; color: #000;">
 	<div class="row">
-	<div class="col-xs-10 col-md-9" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['title'];?></div>
-	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
-
+	<div class="col-xs-12 col-md-9" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['title'];?></div>
+    <div class="col-xs-12 col-md-3" style="padding-bottom: 0px; padding-right: 0px;">
+	 <button class="btn btn-primary fa fa-search" id="viewls" data-id="<?=$rx['id'];?>" data-title="<?=$rx['title'];?>" title="View this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+	 
 	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
-
-	 <button class="btn btn-primary fa fa-search" id="viewls" data-id="<?=$rx['id'];?>" title="View this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+	 
+	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
+	 </div>	 
 	 <div class="clearfix"></div>
 	 </div>
  </li>
@@ -112,11 +114,12 @@ $(document).ready(function(){
 	
 $(document).on("click","#viewls",function() {
 	var id=$(this).data('id');
+	var tt=$(this).data('title');
 	$('#content').empty();
-	$("#content").load('viewlesson.php?id='+id);
-	$('.modwidth').css('width','54%');
+	$("#content").load('viewinformation.php?id='+id);
+	$('.modwidth').css('width','75%');
 	$('.modcap').empty();
-	$(".modcap").append('Lesson Preview');
+	$(".modcap").append(tt);
 	$('#POPMODAL').modal('show');
 });	
 	
