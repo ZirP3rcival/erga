@@ -91,7 +91,7 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	        <li class="menu-has-children"><a class="ticker-btn" href="#">System Records</a>
 	          <ul class="popul">
 					<li><a class="ticker-btn" href="?page=accounts_module" id="accmod">Accounts Module</a></li>
-					<li><a class="ticker-btn" href="?page=glossary_module" id="conmod">Contents Module</a></li>
+					<li><a class="ticker-btn" href="?page=glossary_settings" id="conmod">Contents Module</a></li>
 	          </ul>
 	        </li>
 <!--	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>-->

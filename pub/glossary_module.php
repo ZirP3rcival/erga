@@ -53,6 +53,7 @@ if($cid=='') { $cid=$_REQUEST['cid']; }
   </div>
   <div class="col-xs-12 col-md-12" style="margin-bottom: 10px; padding: 0px;">
   <button class="btn btn-info btn-block" id="cnew" name="cnew" data-toggle="modal" data-target="#NGC" style="margin-top: 25px;" > New Glossary Category </button>
+  
   <button class="btn btn-primary btn-block" id="gnew" name="gnew" data-toggle="modal" data-target="#NGR" style="margin-top: 15px;" > New Glossary Record </button>
   </div>
  </div>  

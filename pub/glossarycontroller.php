@@ -33,7 +33,7 @@ $cid = mysqli_real_escape_string($con,$_REQUEST['cid']);
 	
 $sql="DELETE FROM erga_glossary_avp WHERE id='$id'";  
  if (!mysqli_query($con,$sql))
-  { $_SESSION['errmsg']='Error Deleting  Glossary Record!!!'; 
+  { $_SESSION['errmsg']='Error Deleting Glossary Record!!!'; 
 	echo $sql;
     header("location:admin?page=glossary_module&cid=$cid");
     exit;
@@ -41,6 +41,23 @@ $sql="DELETE FROM erga_glossary_avp WHERE id='$id'";
  else  
    { $_SESSION['errmsg']=' Glossary Record Deleted Successfully!!!'; 
      header("location:admin?page=glossary_module&cid=$cid");
+     exit;
+  }  
+}
+
+if ($prc=='X') {		
+$id = mysqli_real_escape_string($con,$_REQUEST['id']);	
+	
+$sql="DELETE FROM `erga_category_list` WHERE id='$id'";  
+ if (!mysqli_query($con,$sql))
+  { $_SESSION['errmsg']='Error Deleting Glossary Record!!!'; 
+	echo $sql;
+    header("location:admin?page=glossary_settings");
+    exit;
+  }
+ else  
+   { $_SESSION['errmsg']=' Glossary Record Deleted Successfully!!!'; 
+     header("location:admin?page=glossary_settings");
      exit;
   }  
 }
