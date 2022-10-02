@@ -4,6 +4,7 @@ include ('connection.php');
 session_start(); 
 error_reporting (E_ALL ^ E_NOTICE); 
 @$a = $xyz / 0; // no error 
+$stype=$_SESSION['accttype']; 
 
 function randomKey($length) {
     $key= '';	
@@ -23,6 +24,48 @@ $T2 = mysqli_real_escape_string($con,$_POST['mnme']);
 $T3 = $T0.', '.$T1.' '.$T2;
 $T4 = mysqli_real_escape_string($con,$_POST['cno']);
 $T5 = mysqli_real_escape_string($con,$_POST['eadd']);
+
+if($stype=='ADMIN') {  $indx='admin'; }
+else if($stype=='FACULTY') {  $indx='faculty'; }
+else if($stype=='STUDENT') {  $indx='student'; }
+
+if ($prc=='A') {			
+$id = $_REQUEST['id'];	
+$T1 = $_REQUEST['set'];	
+	
+$sql="UPDATE erga_users_account SET actv='$T1' WHERE id='$id'";  
+ if (!mysqli_query($con,$sql))
+  {  
+	$_SESSION['errmsg']='Error Setting User Account Status!!!';  
+    header("location:admin?page=accounts_settings");
+    exit;
+  }
+ else  
+   {
+	 $_SESSION['errmsg']='User Account Status Set Successfully!!!'; 
+     header("location:admin?page=accounts_settings");
+     exit;
+  }   
+}
+
+if ($prc=='C') {		
+$T4 = mysqli_real_escape_string($con,$_POST['aeadd']);
+$T6 = mysqli_real_escape_string($con,$_POST['ausr']);
+$T7 = mysqli_real_escape_string($con,$_POST['apwd']);
+$T8 = mysqli_real_escape_string($con,$_POST['atyp']);	
+  
+$sql="INSERT INTO erga_users_account(eadd,usr,pwd,actv,typ) VALUES ('$T4','$T6',MD5('$T7'),'Y','$T8')";  
+ if (!mysqli_query($con,$sql))
+  { $_SESSION['errmsg']='Error Saving New User Account!<br>Please Re-type All Entries Properly....'; 
+    header("location:admin?page=accounts_settings");
+    exit;
+  }
+ else  
+   { $_SESSION['errmsg']='New User Account Submitted Successfully!<br>Please advise user to login and finish profiling'; 
+     header("location:admin?page=accounts_settings");
+     exit;
+  }  
+}
 
 if ($prc=='S') {			
 	
@@ -51,18 +94,19 @@ $sql="INSERT INTO erga_users_account(lnme, fnme, mnme, eadd, cno, alyas, actv, t
   }   
 }
 
-if ($prc=='D') {			
+if ($prc=='D') {	
+$id = $_REQUEST['id'];		
 $sql="DELETE FROM erga_users_account WHERE id='$id'";  
  if (!mysqli_query($con,$sql))
   {  
-	$_SESSION['errmsg']='Error Deleting Student Record!!!'; 
-    header("location:faculty?page=student_record");
+	$_SESSION['errmsg']='Error Deleting User Account Record!!!'; 
+    header("location:admin?page=accounts_settings");
     exit;
   }
  else  
    {
-	 $_SESSION['errmsg']='Student Record Deleted Successfully!!!'; 
-     header("location:faculty?page=student_record");
+	 $_SESSION['errmsg']='User Account Record Deleted Successfully!!!'; 
+     header("location:admin?page=accounts_settings");
      exit;
   }   
 }
@@ -94,4 +138,5 @@ if($ct==0)
      exit;
   }   
 }
+
 ?>

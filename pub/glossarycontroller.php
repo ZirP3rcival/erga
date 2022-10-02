@@ -16,13 +16,13 @@ $sql="INSERT INTO erga_glossary_avp(fid, title, flink,ftype) VALUES ('$fid','$ti
  if (!mysqli_query($con,$sql))
   { 
 	$_SESSION['errmsg']='Error Saving Glossary Record!!!'; 
-    header("location:admin?page=glossary_module");
+    header("location:faculty?page=glossary_module");
     exit;
   }
  else  
    { 
 	 $_SESSION['errmsg']='Glossary Record Saved Successfully!!!'; 
-     header("location:admin?page=glossary_module");
+     header("location:faculty?page=glossary_module");
      exit;
   }  
 }
@@ -41,6 +41,24 @@ $sql="DELETE FROM erga_glossary_avp WHERE id='$id'";
  else  
    { $_SESSION['errmsg']=' Glossary Record Deleted Successfully!!!'; 
      header("location:admin?page=glossary_module&cid=$cid");
+     exit;
+  }  
+}
+
+if ($prc=='N') {		
+$title = strtoupper(mysqli_real_escape_string($con,$_POST['title']));
+	
+$sql="INSERT INTO erga_category_list(category) VALUES ('$title')";  
+ if (!mysqli_query($con,$sql))
+  { 
+	$_SESSION['errmsg']='Error Saving Glossary Category!!!'; 
+    header("location:admin?page=glossary_settings");
+    exit;
+  }
+ else  
+   { 
+	 $_SESSION['errmsg']='Glossary Glossary Category Saved Successfully!!!'; 
+     header("location:admin?page=glossary_settings");
      exit;
   }  
 }

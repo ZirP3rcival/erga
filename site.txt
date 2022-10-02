@@ -1,0 +1,18 @@
+e-rga.mydiscussion.net
+
+MySQL DB Name	=bytes_13409759_ergadb
+MySQL User Name	=bytes_13409759
+MySQL Password	=(Your vPanel Password)
+MySQL Host Name	PHPMyAdmin	=sql100.0lx.net
+
+<?php
+$mysqlserver = "sql100.0lx.net";
+$mysqlusername = "bytes_13409759";
+$mysqlpassword = "adminsecret";
+$mysqldatabasename = "bytes_13409759_wrsmisdb";
+
+$con = mysqli_connect($mysqlserver,$mysqlusername,$mysqlpassword) or die("Error Connecting to Database");
+mysqli_select_db($con,$mysqldatabasename) or die("Cannot Connect to Database");
+?> 	
+	
+	

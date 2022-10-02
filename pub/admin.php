@@ -82,15 +82,6 @@ $(document).on("click","#my_account,.usrimg",function() {
 	$('.modcap').empty();
 	$(".modcap").append('User Account Information');
 	$('#POPMODAL').modal('show');  
-});	
-	
-$(document).on("click","#conrec",function() {
-	$('#content').empty();
-	$("#content").load('glossary_record.php');
-	$('.modwidth').css('width','75%');
-	$('.modcap').empty();
-	$(".modcap").append('System Glossary Records Module');
-	$('#POPMODAL').modal('show');  
 });		
 	
 });

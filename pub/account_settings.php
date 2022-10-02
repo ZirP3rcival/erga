@@ -5,9 +5,7 @@ session_start();
 error_reporting (E_ALL ^ E_NOTICE); 
 $stype=$_SESSION['accttype']; 
 
-$cid=$_POST['category'];
-
-if($cid=='') { $cid=$_REQUEST['cid']; }
+$cid=$_REQUEST['id']; 
 ?>
 <style>
 .form-control  {
@@ -25,46 +23,51 @@ if($cid=='') { $cid=$_REQUEST['cid']; }
     <div class="income-order-visit-user-area m-bottom ">
         <div class="container-fluid">           
             <div class="row rowflx" style="margin-bottom: 50px;">
-<div class="col-lg-4 col-xs-12 my-acct-box mg-tb-31 dash-video" style="padding: 15px;">
+<div class="col-lg-5 col-xs-12 my-acct-box mg-tb-31 dash-video" style="padding: 15px;">
 	<div class="card">
 		  <div class="card-block card-top login-fm my-acct-title">
 			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #000!important; text-align: left; padding: 15px;">
-			 <span class="fa fa-folder" style="margin-right: 15px; font-size: 2em;"></span>Glossary Records Module</h4>
+			 <span class="fa fa-list-alt" style="margin-right: 15px; font-size: 2em;"></span>Glossary Category
+			 <button type="button" class="btn btn-success fa fa-save" id="CNEW" data-toggle="modal" data-target="#NCAT" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;" title="Create New Category"></button>
+			 </h4>
 		  </div>	  
 <div class="card-block box" style="padding: 10px;">
 <div style="background: #FFF;"> 
- <form method="post" action="?page=glossary_module" id="frmslst" name="frmslst"> </form>	
-  <div class="col-xs-12 col-md-12" style="margin-bottom: 10px; padding: 0px;">
-    <div class="col-xs-12 col-md-12" style="padding: 0px;"><span class="mf" style="float:left; margin-right:10px;">Select Category : </span></div>
-	<div class="col-xs-12 col-md-12" style="padding: 0px;">	
-	<select name="category" required class="form-control" id="category" style="display: inline-block; position:inherit; width:100%;" form="frmslst" onChange="this.form.submit();" title="Select Category">
-			  <option value="" >- Select -</option>
-	<?php	
-	$dsql = mysqli_query($con,"SELECT * FROM erga_category_list ORDER BY category ASC");
-
-	  while($r = mysqli_fetch_assoc($dsql))
-	   {  ?>   
-		<option value="<?=$r['id'];?>" <?=($cid == $r['id'] ? 'selected' : '');?>><?=$r['category'];?></option> 
-	<?php  } ?>  
-			</select>
-	</div>
-	<div class="clearfix"></div>
-	
-  </div>
-  <div class="col-xs-12 col-md-12" style="margin-bottom: 10px; padding: 0px;">
-  <button class="btn btn-primary btn-block" id="gnew" name="gnew" data-toggle="modal" data-target="#NGR" style="margin-top: 15px;" > New Glossary Record </button>
-  </div>
+<ul>
+<?php 
+$dsql = mysqli_query($con,"SELECT * from `erga_category_list` ORDER BY category ASC");
+  while($rx = mysqli_fetch_assoc($dsql))
+   { 
+    ?>                                   
+<li class="list-group-item" style="padding: 5px 15px; font-size: 14px; color: #000;">
+	<div class="row">
+	<div class="col-xs-12 col-md-8" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['category'];?></div>
+    <div class="col-xs-12 col-md-4" style="padding-bottom: 0px; padding-right: 0px;">
+	 
+	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=X&cid=<?=$cid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')">
+		 <button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+	 </a>
+	 <a href="?page=glossary_settings&id=<?=$rx['id'];?>"  style="margin-right:10px;" title="View Category Record" onclick="return confirm('View Category Record?')">	 
+		 <button class="btn btn-primary fa fa-search"  style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+	 </a>
+	 	 
+	 </div>	 
+	 <div class="clearfix"></div>
+	 </div>
+ </li>
+ <?php } ?>
+</ul>
  </div>  
 <div class="clearfix">  </div>                           
 </div>
 	</div>
 </div>  
 
-<div class="col-lg-8 col-xs-12 my-acct-box mg-tb-31" style="padding-bottom: 15px;">
+<div class="col-lg-7 col-xs-12 my-acct-box mg-tb-31" style="padding-bottom: 15px;">
 	<div class="card dash-video">
 		  <div class="card-block card-top login-fm my-acct-title">
 			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #fff!important; text-align: left; padding: 15px;">
-			 <span class="fa fa-list" style="margin-right: 15px; font-size: 2em;"></span>Glossary Record Content</h4>
+			 <span class="fa fa-list" style="margin-right: 15px; font-size: 2em;"></span>Glossary Category Content</h4>
 		  </div>
   
 <div class="card-block" style="margin: 0px 15px;">
@@ -113,48 +116,23 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE ftype='$cid' OR
 </section>
 
 <!-- ######################################## CREATE GRADE LEVEL RECORD ################################### -->
-<div class="modal fade" id="NGR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="NCAT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header login-fm" style="color:#fff;">
-       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">Create Glossary Record
+       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">New Glossary Category
        </h4>
       </div>   
      <div class="modal-body">       
-<form action="glossarycontroller.php?prc=S&cid=<?=$cid?>" method="post" class="form-horizontal" id="frmcgrd" name="frmcgrd" style="margin:0px; padding:0px 12px;" role="form">
+<form action="glossarycontroller.php?prc=N" method="post" class="form-horizontal" id="frmcgrd" name="frmcgrd" style="margin:0px; padding:0px 12px;" role="form">
                       <div class="form-group">
-                        <label for="username">Glossary Record Title :</label>
+                        <label for="username">New Category Title :</label>
                         <input name="title" type="text" class="form-control" id="title" maxlength="100" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="username">Published Link :</label>
-                        <textarea name="flink" type="text" class="form-control" id="flink" rows="5"  required></textarea>
-                      </div>                      
+                      </div>                     
 </form>
 </div>
 <div class="modal-footer col-xs-12 col-md-12 login-fm" style="margin-top:0px;  color:#fff;font-size: 12px; padding: 10px 15px;">
- <button type="button" class="btn btn-info" id="editor" name="editor" style="font-size: 12px; float: left;" form="frmcgrd"/>Create Record</button>
  <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmcgrd"/>Submit</button>
- <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px;">Close</button>
-</div>
-    </div>
-  </div>
-</div>
-<!-- ############################################################################################ -->
-<!-- ######################################## CREATE GRADE LEVEL RECORD ################################### -->
-<div class="modal fade" id="ULM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" >
-    <div class="modal-content">
-      <div class="modal-header login-fm" style="color:#fff;">
-       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">Update Lesson Record
-       </h4>
-      </div>   
-<div class="modal-body" id="contentx">        
-
-</div>
-<div class="modal-footer col-xs-12 col-md-12 login-fm" style="margin-top:0px;  color:#fff;font-size: 12px; padding: 10px 15px;">
- <button type="button" class="btn btn-info" id="editor" name="editor" style="font-size: 12px;" form="frmuml"/>Create Lesson</button>
- <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmuml"/>Update</button>
  <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px;">Close</button>
 </div>
     </div>
@@ -170,7 +148,7 @@ $(document).on("click","#viewls",function() {
 	var tt=$(this).data('title');
 	$('#content').empty();
 	$("#content").load('viewinformation.php?id='+id);
-	$('.modwidth').css('width','75%');
+//	$('.modwidth').css('width','900px!important');
 	$('.modcap').empty();
 	$(".modcap").append(tt);
 	$('#POPMODAL').modal('show');

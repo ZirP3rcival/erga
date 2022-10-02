@@ -189,7 +189,7 @@ p {
 
 @media (min-width: 576px)
 {
-.modal-dialog {
+.modwidth {
     max-width: 900px!important;
 	}
 }

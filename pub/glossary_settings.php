@@ -27,7 +27,9 @@ $cid=$_REQUEST['id'];
 	<div class="card">
 		  <div class="card-block card-top login-fm my-acct-title">
 			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #000!important; text-align: left; padding: 15px;">
-			 <span class="fa fa-list-alt" style="margin-right: 15px; font-size: 2em;"></span>Glossary Category</h4>
+			 <span class="fa fa-list-alt" style="margin-right: 15px; font-size: 2em;"></span>Glossary Category
+			 <button type="button" class="btn btn-success fa fa-save" id="CNEW" data-toggle="modal" data-target="#NCAT" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;" title="Create New Category"></button>
+			 </h4>
 		  </div>	  
 <div class="card-block box" style="padding: 10px;">
 <div style="background: #FFF;"> 
@@ -113,49 +115,24 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE ftype='$cid' OR
 	</div>	
 </section>
 
-<!-- ######################################## CREATE GRADE LEVEL RECORD ################################### -->
-<div class="modal fade" id="NGR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- ######################################## CREATE CATEGORY RECORD ################################### -->
+<div class="modal fade" id="NCAT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" >
     <div class="modal-content">
       <div class="modal-header login-fm" style="color:#fff;">
-       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">Create Glossary Record
+       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">New Glossary Category
        </h4>
       </div>   
      <div class="modal-body">       
-<form action="glossarycontroller.php?prc=S&cid=<?=$cid?>" method="post" class="form-horizontal" id="frmcgrd" name="frmcgrd" style="margin:0px; padding:0px 12px;" role="form">
+<form action="glossarycontroller.php?prc=N" method="post" class="form-horizontal" id="frmcgrd" name="frmcgrd" style="margin:0px; padding:0px 12px;" role="form">
                       <div class="form-group">
-                        <label for="username">Glossary Record Title :</label>
+                        <label for="username">New Category Title :</label>
                         <input name="title" type="text" class="form-control" id="title" maxlength="100" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="username">Published Link :</label>
-                        <textarea name="flink" type="text" class="form-control" id="flink" rows="5"  required></textarea>
-                      </div>                      
+                      </div>                     
 </form>
 </div>
 <div class="modal-footer col-xs-12 col-md-12 login-fm" style="margin-top:0px;  color:#fff;font-size: 12px; padding: 10px 15px;">
- <button type="button" class="btn btn-info" id="editor" name="editor" style="font-size: 12px; float: left;" form="frmcgrd"/>Create Record</button>
  <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmcgrd"/>Submit</button>
- <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px;">Close</button>
-</div>
-    </div>
-  </div>
-</div>
-<!-- ############################################################################################ -->
-<!-- ######################################## CREATE GRADE LEVEL RECORD ################################### -->
-<div class="modal fade" id="ULM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" >
-    <div class="modal-content">
-      <div class="modal-header login-fm" style="color:#fff;">
-       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">Update Lesson Record
-       </h4>
-      </div>   
-<div class="modal-body" id="contentx">        
-
-</div>
-<div class="modal-footer col-xs-12 col-md-12 login-fm" style="margin-top:0px;  color:#fff;font-size: 12px; padding: 10px 15px;">
- <button type="button" class="btn btn-info" id="editor" name="editor" style="font-size: 12px;" form="frmuml"/>Create Lesson</button>
- <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmuml"/>Update</button>
  <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px;">Close</button>
 </div>
     </div>
@@ -171,24 +148,10 @@ $(document).on("click","#viewls",function() {
 	var tt=$(this).data('title');
 	$('#content').empty();
 	$("#content").load('viewinformation.php?id='+id);
-	$('.modwidth').css('width','75%');
+//	$('.modwidth').css('width','900px!important');
 	$('.modcap').empty();
 	$(".modcap").append(tt);
 	$('#POPMODAL').modal('show');
-});	
-	
-$(document).on("click","#editls",function() {
-	var id=$(this).data('id');
-	$('#contentx').empty();
-	$("#contentx").load('updatelesson.php?id='+id);
-	$('.modwidth').css('width','45%');
-	$('.modcap').empty();
-	$(".modcap").append('Update Lesson Record');
-	$('#ULM').modal('show');
-});	
-	
-$(document).on("click","#editor",function() {
-	 window.open('https://docs.google.com/presentation/u/0/','_blank');
 });		
 	
 });
