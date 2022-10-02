@@ -42,7 +42,7 @@ $dsql = mysqli_query($con,"SELECT * from `erga_category_list` ORDER BY category 
 	<div class="col-xs-12 col-md-8" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['category'];?></div>
     <div class="col-xs-12 col-md-4" style="padding-bottom: 0px; padding-right: 0px;">
 	 
-	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D&cid=<?=$cid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')">
+	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=X&cid=<?=$cid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')">
 		 <button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
 	 </a>
 	 <a href="?page=glossary_settings&id=<?=$rx['id'];?>"  style="margin-right:10px;" title="View Category Record" onclick="return confirm('View Category Record?')">	 
