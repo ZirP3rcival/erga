@@ -79,4 +79,24 @@ $sql="DELETE FROM `erga_category_list` WHERE id='$id'";
      exit;
   }  
 }
+
+if ($prc=='U') {		
+$title = mysqli_real_escape_string($con,$_POST['title']);
+$flink = mysqli_real_escape_string($con,$_POST['flink']);
+$id = mysqli_real_escape_string($con,$_REQUEST['id']);	
+	
+$sql="UPDATE erga_glossary_avp SET title='$title', flink='$flink' WHERE id='$id'";  
+ if (!mysqli_query($con,$sql))
+  { 
+	$_SESSION['errmsg']='Error Updating Glossary Record!!!'; 
+    header("location:faculty?page=glossary_module");
+    exit;
+  }
+ else  
+   { 
+	 $_SESSION['errmsg']='Glossary Record Updated Successfully!!!'; 
+     header("location:faculty?page=glossary_module");
+     exit;
+  }  
+}
 ?>
