@@ -99,4 +99,30 @@ $sql="UPDATE erga_glossary_avp SET title='$title', flink='$flink' WHERE id='$id'
      exit;
   }  
 }
+
+if ($prc=='NT') {
+$cid = mysqli_real_escape_string($con,$_REQUEST['cid']);	
+$gtype = mysqli_real_escape_string($con,$_POST['gtype ']);	
+$qst = mysqli_real_escape_string($con,$_POST['nqst']);
+$qa1 = mysqli_real_escape_string($con,$_POST['nqa1']);
+$qa2 = mysqli_real_escape_string($con,$_POST['nqa2']);
+$qa3 = mysqli_real_escape_string($con,$_POST['nqa3']);
+$qa4 = mysqli_real_escape_string($con,$_POST['nqa4']);
+$qky = $_POST['nqky'];		
+	
+	$sql="INSERT INTO erga_glossary_trivia(cid, gtype, gquest, gans1, gans2, gans3, gans4, gkey) VALUES ('$cid', '$gtype', '$qst', '$qa1', '$qa2', '$qa3', '$qa4', '$qky')";  
+	
+	 if (!mysqli_query($con,$sql))
+	  {  
+		$_SESSION['errmsg']='Error Saving Glossary Assessment Record!!!'; 
+		header("location:faculty?page=glossary_module&cid=$cid");
+		exit;
+	  }
+	 else  
+	   { 
+		 $_SESSION['errmsg']=$msg.' Assessment Content Successfull!!!'; 
+		 header("location:faculty?page=assessment_records&fgrd=$fgrd&fsbj=$fsbj&fscd=$fscd&fcat=$fcat");
+		 exit;
+	  }
+}	
 ?>
