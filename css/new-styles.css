@@ -161,6 +161,13 @@ p {
     margin-bottom: 30px;
 }
 
+
+@media (min-width: 1200px){
+.container {
+    max-width: 1320px!important;
+  }
+}
+
 @media (max-width: 767px)  /* 960px*/
 {
 .modwidth {

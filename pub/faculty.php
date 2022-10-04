@@ -12,7 +12,7 @@ if ($id=='')
 }
 
 $page = $_REQUEST['page'];
-if($page=='') { $page='dashboard_faculty'; }
+if($page=='') { $page='dashboard_admin'; }
 $wp = $page.'.php';
 
 ?>

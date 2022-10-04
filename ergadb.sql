@@ -63,7 +63,7 @@ CREATE TABLE `erga_glossary_avp` (
 
 /*Data for the table `erga_glossary_avp` */
 
-insert  into `erga_glossary_avp`(`id`,`fid`,`title`,`flink`,`ftype`) values (1,112,'SQL Commands','<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vR1ZyyU1WlzQLK-cL6x8-UOzohkWZyxakzemb1EI9k8JFqGma1t9sjzhjVn1p1h3Q/embed?start=true&loop=true&delayms=30000\" frameborder=\"0\" width=\"1280\" height=\"749\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>','1'),(2,112,'Philippine History Information','<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vQ6CMug9aFZe-FioeIiZl8Ly78hzBJB9mmgX-OdjPIyFLRbkKJ7ahQwZZnbt1urHAMT-uMut4VRIoQC/embed?start=true&loop=true&delayms=30000\" frameborder=\"0\" width=\"960\" height=\"749\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>','2'),(6,115,'sample','<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vQM577Sk5zL6UbLlRPNEVqPMxB0W0dl5u3FwEHLwjFKX7cvSye79oYR5QnbLUVL3HqaWV9ELvCpc_59/embed?start=true&loop=true&delayms=30000\" frameborder=\"0\" width=\"1280\" height=\"749\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>','1'),(7,112,'C# Programming','<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vQM577Sk5zL6UbLlRPNEVqPMxB0W0dl5u3FwEHLwjFKX7cvSye79oYR5QnbLUVL3HqaWV9ELvCpc_59/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"1280\" height=\"749\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>','4');
+insert  into `erga_glossary_avp`(`id`,`fid`,`title`,`flink`,`ftype`) values (1,112,'Learning Database Manipulation using SQL Commands','<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vR1ZyyU1WlzQLK-cL6x8-UOzohkWZyxakzemb1EI9k8JFqGma1t9sjzhjVn1p1h3Q/embed?start=true&loop=true&delayms=30000\" frameborder=\"0\" width=\"1280\" height=\"749\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>','1'),(2,112,'Philippine History Information','<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vQ6CMug9aFZe-FioeIiZl8Ly78hzBJB9mmgX-OdjPIyFLRbkKJ7ahQwZZnbt1urHAMT-uMut4VRIoQC/embed?start=true&loop=true&delayms=30000\" frameborder=\"0\" width=\"960\" height=\"749\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>','2'),(6,115,'sample','<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vQM577Sk5zL6UbLlRPNEVqPMxB0W0dl5u3FwEHLwjFKX7cvSye79oYR5QnbLUVL3HqaWV9ELvCpc_59/embed?start=true&loop=true&delayms=30000\" frameborder=\"0\" width=\"1280\" height=\"749\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>','1'),(7,112,'C# Programming','<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vQM577Sk5zL6UbLlRPNEVqPMxB0W0dl5u3FwEHLwjFKX7cvSye79oYR5QnbLUVL3HqaWV9ELvCpc_59/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"1280\" height=\"749\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>','4');
 
 /*Table structure for table `erga_glossary_img` */
 
@@ -86,8 +86,8 @@ DROP TABLE IF EXISTS `erga_glossary_trivia`;
 
 CREATE TABLE `erga_glossary_trivia` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `gid` int(10) DEFAULT NULL,
-  `qtype` int(1) DEFAULT '0',
+  `cid` int(10) DEFAULT NULL,
+  `gtype` int(1) DEFAULT '0',
   `gquest` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
   `gans1` varchar(100) DEFAULT NULL,
   `gans2` varchar(100) DEFAULT NULL,
@@ -95,10 +95,12 @@ CREATE TABLE `erga_glossary_trivia` (
   `gans4` varchar(100) DEFAULT NULL,
   `gkey` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `mid` (`gid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY `mid` (`cid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `erga_glossary_trivia` */
+
+insert  into `erga_glossary_trivia`(`id`,`cid`,`gtype`,`gquest`,`gans1`,`gans2`,`gans3`,`gans4`,`gkey`) values (2,1,0,'qwerty','e1','e2','e3','e4','A'),(3,1,1,'assfsdfsd','qq','www','eee','d','B'),(4,1,0,'xvxcxc','xcvx','xcv','xcv','xcv','C'),(6,1,1,'dssdfsdf','s','xcv','xcv','xv','B');
 
 /*Table structure for table `erga_track_list` */
 

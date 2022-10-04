@@ -101,8 +101,9 @@ $sql="UPDATE erga_glossary_avp SET title='$title', flink='$flink' WHERE id='$id'
 }
 
 if ($prc=='NT') {
-$cid = mysqli_real_escape_string($con,$_REQUEST['cid']);	
-$gtype = mysqli_real_escape_string($con,$_POST['gtype ']);	
+$cid = mysqli_real_escape_string($con,$_REQUEST['cid']);
+$tid = mysqli_real_escape_string($con,$_REQUEST['tid']);		
+$gtype = mysqli_real_escape_string($con,$_POST['gtype']);	
 $qst = mysqli_real_escape_string($con,$_POST['nqst']);
 $qa1 = mysqli_real_escape_string($con,$_POST['nqa1']);
 $qa2 = mysqli_real_escape_string($con,$_POST['nqa2']);
@@ -111,18 +112,35 @@ $qa4 = mysqli_real_escape_string($con,$_POST['nqa4']);
 $qky = $_POST['nqky'];		
 	
 	$sql="INSERT INTO erga_glossary_trivia(cid, gtype, gquest, gans1, gans2, gans3, gans4, gkey) VALUES ('$cid', '$gtype', '$qst', '$qa1', '$qa2', '$qa3', '$qa4', '$qky')";  
-	
 	 if (!mysqli_query($con,$sql))
 	  {  
 		$_SESSION['errmsg']='Error Saving Glossary Assessment Record!!!'; 
-		header("location:faculty?page=glossary_module&cid=$cid");
+		header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
 		exit;
 	  }
 	 else  
 	   { 
 		 $_SESSION['errmsg']=$msg.' Assessment Content Successfull!!!'; 
-		 header("location:faculty?page=assessment_records&fgrd=$fgrd&fsbj=$fsbj&fscd=$fscd&fcat=$fcat");
+		 header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
 		 exit;
 	  }
 }	
+
+if ($prc=='DT') {		
+$id = mysqli_real_escape_string($con,$_REQUEST['id']);	
+$cid = mysqli_real_escape_string($con,$_REQUEST['cid']);
+$tid = mysqli_real_escape_string($con,$_REQUEST['tid']);		
+$sql="DELETE FROM erga_glossary_trivia WHERE id='$id'";  
+ if (!mysqli_query($con,$sql))
+  { $_SESSION['errmsg']='Error Deleting Glossary Trivia Record!!!'; 
+	echo $sql;
+    header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
+    exit;
+  }
+ else  
+   { $_SESSION['errmsg']=' Glossary Trivia Record Deleted Successfully!!!'; 
+     header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
+     exit;
+  }  
+}
 ?>

@@ -3,6 +3,8 @@ ob_start();
 include ('connection.php');
 session_start(); 
 error_reporting (E_ALL ^ E_NOTICE); 
+
+$fsrch=$_POST['fsrch'];
 $stype=$_SESSION['accttype']; 
 $fid=$_SESSION['id'];
 $cid=$_POST['category'];
@@ -63,7 +65,7 @@ if($tid!='') { $dsp='block'; }
 	</div>
 </div>  
 
-<div class="col-lg-6 col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin-top: 15px;">
+<div class="col-lg-7 col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin-top: 15px;">
 	<div class="card dash-video">
 		  <div class="card-block card-top login-fm my-acct-title">
 			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #fff!important; text-align: left; padding: 15px;">
@@ -72,7 +74,7 @@ if($tid!='') { $dsp='block'; }
   
 <div class="card-block" style="margin: 0px 15px; background: #fff; padding: 0px 15px; margin-bottom: 15px;">
 	<div class="col-xs-12 col-md-12" style="margin-top: 10px; padding: 0px;">
-	<form id="msearch" action="?page=glossary_module&prc=fsch" method="post" class="form-horizontal" style="margin-bottom: 15px;">
+	<form id="msearch" action="?page=glossary_module" method="post" class="form-horizontal" style="margin-bottom: 15px;">
 	   <div class="input-group">
 		 <input name="fsrch" type="text" class="form-control isearch" placeholder="Search Content Title Here" value="<?=$fsrch;?>">
 		  <span class="input-group-btn">
@@ -97,9 +99,12 @@ $currentPageRV = ((isset($_GET['ppageRV']) && $_GET['ppageRV'] > 0) ? (int)$_GET
 $offsetRV = ($currentPageRV-1)*$rowsPerPageRV;
 $cp=$currentPageRV;
 	
-$dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE ftype='$cid' AND fid='$fid' ORDER BY title ASC LIMIT $offsetRV, $rowsPerPageRV");
+$byword = " AND title LIKE '%$fsrch%' ";	
+$bytype = " AND ftype LIKE '%$cid%' ";	
+	
+$dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE fid='$fid' $bytype $byword ORDER BY title ASC LIMIT $offsetRV, $rowsPerPageRV");
   while($rx = mysqli_fetch_assoc($dsql))
-   { 
+   {  if($cid=='')  { $cid=$rx['ftype']; }
     ?>                                   
 <li class="list-group-item" style="padding: 5px 15px; font-size: 14px; color: #000;">
 	<div class="row">
@@ -161,12 +166,12 @@ if($currentPageRV < $totalPagesRV)
 </div> 
 </div>   
 
-<div class="col-lg-6 col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin-top: 15px;">
+<div class="col-lg-5 col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin-top: 15px;">
 	<div class="card dash-video">
 		  <div class="card-block card-top login-fm my-acct-title">
 			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #fff!important; text-align: left; padding: 15px;">
 			 <span class="fa fa-list" style="margin-right: 15px; font-size: 2em;"></span>Glossary Trivia Content
-			 	 <button class="btn btn-success fa fa-save" id="trivia" data-id="<?=$cid;?>" title="Create Trivia Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; display: <?=$dsp;?>"></button>
+			 	 <button class="btn btn-success fa fa-save" id="trivia" data-cid="<?=$cid;?>" data-tid="<?=$tid;?>" title="Create Trivia Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; display: <?=$dsp;?>"></button>
 			 </h4>
 		  </div>
   
@@ -179,21 +184,25 @@ if($currentPageRV < $totalPagesRV)
 	</div>
 </li>
 <?php 
+if($tid!='') {	
 $rowsPerPageTV = 5;
 $currentPageTV = ((isset($_GET['ppageTV']) && $_GET['ppageTV'] > 0) ? (int)$_GET['ppageTV'] : 1);
 $offsetTV = ($currentPageTV-1)*$rowsPerPageTV;
 $cp=$currentPageTV;
 	
 $dsql = mysqli_query($con,"SELECT * from erga_glossary_trivia WHERE cid='$tid' ORDER BY id ASC LIMIT $offsetTV, $rowsPerPageTV");
+	
   while($rx = mysqli_fetch_assoc($dsql))
-   { 
+   { $tp=$rx['gtype'];  if($tp=='0') { $typ='PRE'; } else  { $typ='POST'; }
+	 $quest=substr($rx['gquest'], 0, 100);
     ?>                                   
 <li class="list-group-item" style="padding: 5px 15px; font-size: 14px; color: #000;">
 	<div class="row">
-	<div class="col-xs-12 col-md-7" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['title'];?></div>
+	<div class="col-xs-12 col-md-2" style="padding-bottom: 0px; padding-right: 0px; padding-left: 10px; font-size: 10px; font-weight: 600;"><?=$typ;?></div>
+    <div class="col-xs-12 col-md-5" style="padding-bottom: 0px; padding-right: 0px;"><?=$quest;?>...</div>
     <div class="col-xs-12 col-md-5" style="padding-bottom: 0px; padding-right: 0px;">
 	 
-	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D&cid=<?=$cid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
+	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=DT&cid=<?=$cid?>&tid=<?=$tid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
 
 	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
 	 
@@ -202,12 +211,13 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_trivia WHERE cid='$tid' O
 	 </div>
  </li>
 
- <?php } ?>
+ <?php } } ?>
 </div>   
 <div style="float: left; width: 100%; margin-bottom: 10px;">
 			<div style="float: left; margin-right: 10px;"><a class="btn btn-default btn-sm" style="margin-left:2px; font-weight:bold; color:#000; font-size:11px; background:#EFEFEF;" href="?page=glossary_module&prc=<?=$prc;?>&cid=<?=$cid;?>&ppageTV=<?=($currentPageTV-1)?>"> prev </a></div>
 			<div style="width:60%; float:left; font-size:11px;">
-			  <?php
+<?php
+if($tid!='') {	
 $sql = mysqli_query($con,"SELECT COUNT(*) AS crt from erga_glossary_trivia WHERE cid='$tid' LIMIT $rowsPerPageTV"); 
 													 
 $row = mysqli_fetch_assoc($sql);
@@ -234,12 +244,14 @@ for ($x=1;$x<=$d;$x++)
  echo '<span style="margin-left:2px; color:#666; font-size:12px;"> .... <strong>'. $totalPagesTV .'</strong> pages</span>'; 
 
 if($currentPageTV < $totalPagesTV) 
-{ echo '<a style="margin-left:2px; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ppageTV='.($currentPageTV+1).'"></a>'; }
+{ echo '<a style="margin-left:2px; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ppageTV='.($currentPageTV+1).'"></a>'; } 
+}
 ?>
 			</div>
 			<div style="float: right; margin-right: 5px;"><a class="btn btn-default btn-sm" style="font-size:11px; margin-left:2px; font-weight:bold; color:#000; background:#EFEFEF;" href="?page=glossary_module&cid=<?=$cid;?>&ppageTV=<?=($currentPageTV+1);?>"> next </a></div>
 <div class="clearfix"></div>	        
-</div>	 
+</div>	
+
 </div> 
 </div> 
 </div>             
@@ -314,7 +326,7 @@ if($currentPageTV < $totalPagesTV)
 
 </div>
 <div class="modal-footer col-xs-12 col-md-12 login-fm" style="margin-top:0px;  color:#fff;font-size: 12px; padding: 10px 15px;">
- <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmuml"/>Submit</button>
+ <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmTR"/>Submit</button>
  <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px;">Close</button>
 </div>
     </div>
@@ -347,9 +359,10 @@ $(document).on("click","#editls",function() {
 });	
 	
 $(document).on("click","#trivia",function() {
-	var id=$(this).data('id');
+	var cid=$(this).data('cid');
+	var tid=$(this).data('tid');
 	$('#contentv').empty();
-	$("#contentv").load('create_trivia.php?cid='+id+'&mde=NT');
+	$("#contentv").load('create_trivia.php?cid='+cid+'&tid='+tid+'&mde=NT');
 	$('.modwidth').css('width','55%');
 	$('.modcap').empty();
 	$(".modcap").append('Glossary Trivia Record');

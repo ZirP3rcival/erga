@@ -7,6 +7,7 @@ error_reporting (E_ALL ^ E_NOTICE);
 
 $fid=$_SESSION['id'];
 $cid=$_REQUEST['cid'];
+$tid=$_REQUEST['tid'];
 $mde=$_REQUEST['mde'];
 
 if($mde=='UT') {
@@ -27,11 +28,11 @@ if($mde=='UT') {
 <div class="card-block box" style="padding: 0px;">
 	<div style="background: #FFF;"> 
  <div class="col-12 col-md-12" style="border-right:1px solid #828080; border-bottom:0px solid #828080; padding:0px;">
-<form action="glossarycontroller.php?prc=<?=$mde?>&cid=<?=$cid?>"  enctype="multipart/form-data"  method="post" style="margin-bottom:0px; width: 100%;" class="form-horizontal" role="form" id="frmAS" >          
+<form action="glossarycontroller.php?prc=<?=$mde?>&cid=<?=$cid?>&tid=<?=$tid?>"  enctype="multipart/form-data"  method="post" style="margin-bottom:0px; width: 100%;" class="form-horizontal" role="form" id="frmTR" >          
 <div class="row" style="margin-left: 10px; margin-right: 10px;">
 	<div class="col-xs-12 col-md-12" style="padding-left: 0px; padding-top: 15px; float: left; color:#000; font-size: 14px;"> Assessment Type : </div>
 	<div class="col-xs-12 col-md-12" style="padding-right: 0px;padding-left: 0px;">
-	<select name="gtype" required class="form-control" id="gtype" style="display: inline-block; position:inherit; width:100%;" form="frmAS" title="Select Category">
+	<select name="gtype" required class="form-control" id="gtype" style="display: inline-block; position:inherit; width:100%;" title="Select Category">
 	<option value="" >- Select  Type-</option> 
 		<option value="0">Pre - Assessment</option>  
 		<option value="1">Post - Assessment</option>  
