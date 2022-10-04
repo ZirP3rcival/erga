@@ -12,7 +12,7 @@ $title = mysqli_real_escape_string($con,$_POST['title']);
 $flink = mysqli_real_escape_string($con,$_POST['flink']);
 $cid = mysqli_real_escape_string($con,$_REQUEST['cid']);
 	
-$sql="INSERT INTO erga_glossary_avp(fid, title, flink,ftype) VALUES ('$fid','$title','$flink','$cid')";  
+$sql="INSERT INTO erga_glossary_ppt(fid, title, flink,ftype) VALUES ('$fid','$title','$flink','$cid')";  
  if (!mysqli_query($con,$sql))
   { 
 	$_SESSION['errmsg']='Error Saving Glossary Record!!!'; 
@@ -31,7 +31,7 @@ if ($prc=='D') {
 $id = mysqli_real_escape_string($con,$_REQUEST['id']);	
 $cid = mysqli_real_escape_string($con,$_REQUEST['cid']);
 	
-$sql="DELETE FROM erga_glossary_avp WHERE id='$id'";  
+$sql="DELETE FROM erga_glossary_ppt WHERE id='$id'";  
  if (!mysqli_query($con,$sql))
   { $_SESSION['errmsg']='Error Deleting Glossary Record!!!'; 
 	echo $sql;
@@ -85,7 +85,7 @@ $title = mysqli_real_escape_string($con,$_POST['title']);
 $flink = mysqli_real_escape_string($con,$_POST['flink']);
 $id = mysqli_real_escape_string($con,$_REQUEST['id']);	
 	
-$sql="UPDATE erga_glossary_avp SET title='$title', flink='$flink' WHERE id='$id'";  
+$sql="UPDATE erga_glossary_ppt SET title='$title', flink='$flink' WHERE id='$id'";  
  if (!mysqli_query($con,$sql))
   { 
 	$_SESSION['errmsg']='Error Updating Glossary Record!!!'; 
@@ -111,20 +111,47 @@ $qa3 = mysqli_real_escape_string($con,$_POST['nqa3']);
 $qa4 = mysqli_real_escape_string($con,$_POST['nqa4']);
 $qky = $_POST['nqky'];		
 	
-	$sql="INSERT INTO erga_glossary_trivia(cid, gtype, gquest, gans1, gans2, gans3, gans4, gkey) VALUES ('$cid', '$gtype', '$qst', '$qa1', '$qa2', '$qa3', '$qa4', '$qky')";  
+	$sql="INSERT INTO erga_glossary_trivia(tid, gtype, gquest, gans1, gans2, gans3, gans4, gkey) VALUES ('$tid', '$gtype', '$qst', '$qa1', '$qa2', '$qa3', '$qa4', '$qky')";  
 	 if (!mysqli_query($con,$sql))
 	  {  
-		$_SESSION['errmsg']='Error Saving Glossary Assessment Record!!!'; 
+		$_SESSION['errmsg']='Error Saving Glossary Trivia Record!!!'; 
 		header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
 		exit;
 	  }
 	 else  
 	   { 
-		 $_SESSION['errmsg']=$msg.' Assessment Content Successfull!!!'; 
+		 $_SESSION['errmsg']='Glossary Trivia Record Saved Successfully!!!'; 
 		 header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
 		 exit;
 	  }
 }	
+
+if ($prc=='UT') {
+$uid = mysqli_real_escape_string($con,$_REQUEST['uid']);
+$cid = mysqli_real_escape_string($con,$_REQUEST['cid']);	
+$tid = mysqli_real_escape_string($con,$_REQUEST['tid']);		
+$gtype = mysqli_real_escape_string($con,$_POST['gtype']);	
+$qst = mysqli_real_escape_string($con,$_POST['nqst']);
+$qa1 = mysqli_real_escape_string($con,$_POST['nqa1']);
+$qa2 = mysqli_real_escape_string($con,$_POST['nqa2']);
+$qa3 = mysqli_real_escape_string($con,$_POST['nqa3']);
+$qa4 = mysqli_real_escape_string($con,$_POST['nqa4']);
+$qky = $_POST['nqky'];		
+	
+	$sql="UPDATE erga_glossary_trivia SET gtype='$gtype', gquest='$qst', gans1='$qa1', gans2='$qa2', gans3='$qa3', gans4='$qa4', gkey='$qky' WHERE id='$uid'";  
+	 if (!mysqli_query($con,$sql))
+	  {  
+		$_SESSION['errmsg']='Error Updating Glossary Trivia Record!!!'; 
+		header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
+		exit;
+	  }
+	 else  
+	   { 
+		 $_SESSION['errmsg']='Glossary Trivia Record Updated Successfully!!!'; 
+		 header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
+		 exit;
+	  }
+}
 
 if ($prc=='DT') {		
 $id = mysqli_real_escape_string($con,$_REQUEST['id']);	
@@ -138,7 +165,7 @@ $sql="DELETE FROM erga_glossary_trivia WHERE id='$id'";
     exit;
   }
  else  
-   { $_SESSION['errmsg']=' Glossary Trivia Record Deleted Successfully!!!'; 
+   { $_SESSION['errmsg']='Glossary Trivia Record Deleted Successfully!!!'; 
      header("location:faculty?page=glossary_module&cid=$cid&tid=$tid");
      exit;
   }  

@@ -80,7 +80,7 @@ $dsql = mysqli_query($con,"SELECT * from `erga_category_list` ORDER BY category 
 </li>
 <?php 
 if($cid!='')	{
-$dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE ftype='$cid' ORDER BY title ASC");
+$dsql = mysqli_query($con,"SELECT * from erga_glossary_ppt WHERE ftype='$cid' ORDER BY title ASC");
   while($rx = mysqli_fetch_assoc($dsql))
    { 
     ?>                                   

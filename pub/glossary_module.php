@@ -102,9 +102,9 @@ $cp=$currentPageRV;
 $byword = " AND title LIKE '%$fsrch%' ";	
 $bytype = " AND ftype LIKE '%$cid%' ";	
 	
-$dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE fid='$fid' $bytype $byword ORDER BY title ASC LIMIT $offsetRV, $rowsPerPageRV");
+$dsql = mysqli_query($con,"SELECT * from erga_glossary_ppt WHERE fid='$fid' $bytype $byword ORDER BY title ASC LIMIT $offsetRV, $rowsPerPageRV");
   while($rx = mysqli_fetch_assoc($dsql))
-   {  if($cid=='')  { $cid=$rx['ftype']; }
+   {  $cid=$rx['ftype']; 
     ?>                                   
 <li class="list-group-item" style="padding: 5px 15px; font-size: 14px; color: #000;">
 	<div class="row">
@@ -113,9 +113,11 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE fid='$fid' $byt
 	 
 	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D&cid=<?=$cid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
 
-	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; color: #fff;"></button>
 
-	 <a href="?page=glossary_module&cid=<?=$cid?>&tid=<?=$rx['id']?>" class="trash" onclick="return confirm('View Trivia Record?')"><button class="btn btn-info fa fa-list-alt trivia" data-id="<?=$rx['id'];?>" title="Create Trivia Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
+	 <button class="btn btn-default fa fa-upload" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Uploads Additional Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; background: #6A76D2; color: #fff;"></button>
+
+	 <a href="?page=glossary_module&cid=<?=$cid?>&tid=<?=$rx['id']?>" class="trash" onclick="return confirm('View Trivia Record?')"><button class="btn btn-info fa fa-list-alt trivia" title="Create Trivia Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
 	 	 
 	 <button class="btn btn-primary fa fa-search" id="viewls" data-id="<?=$rx['id'];?>" data-title="<?=$rx['title'];?>" title="View this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
 	 
@@ -130,7 +132,7 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_avp WHERE fid='$fid' $byt
 			<div style="float: left; margin-right: 10px;"><a class="btn btn-default btn-sm" style="margin-left:2px; font-weight:bold; color:#000; font-size:11px; background:#EFEFEF;" href="?page=glossary_module&prc=<?=$prc;?>&cid=<?=$cid;?>&ppageRV=<?=($currentPageRV-1)?>"> prev </a></div>
 			<div style="width:60%; float:left; font-size:11px;">
 			  <?php
-$sql = mysqli_query($con,"SELECT COUNT(*) AS crt from erga_glossary_avp WHERE ftype='$cid' AND fid='$fid' LIMIT $rowsPerPageRV"); 
+$sql = mysqli_query($con,"SELECT COUNT(*) AS crt from erga_glossary_ppt WHERE ftype='$cid' AND fid='$fid' LIMIT $rowsPerPageRV"); 
 														 
 $row = mysqli_fetch_assoc($sql);
 $totalPagesRV = ceil($row['crt'] / $rowsPerPageRV);
@@ -190,7 +192,7 @@ $currentPageTV = ((isset($_GET['ppageTV']) && $_GET['ppageTV'] > 0) ? (int)$_GET
 $offsetTV = ($currentPageTV-1)*$rowsPerPageTV;
 $cp=$currentPageTV;
 	
-$dsql = mysqli_query($con,"SELECT * from erga_glossary_trivia WHERE cid='$tid' ORDER BY id ASC LIMIT $offsetTV, $rowsPerPageTV");
+$dsql = mysqli_query($con,"SELECT * from erga_glossary_trivia WHERE tid='$tid' ORDER BY id ASC LIMIT $offsetTV, $rowsPerPageTV");
 	
   while($rx = mysqli_fetch_assoc($dsql))
    { $tp=$rx['gtype'];  if($tp=='0') { $typ='PRE'; } else  { $typ='POST'; }
@@ -204,7 +206,7 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_trivia WHERE cid='$tid' O
 	 
 	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=DT&cid=<?=$cid?>&tid=<?=$tid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
 
-	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
+	 <button class="btn btn-warning fa fa-edit edtrv" data-id="<?=$rx['id'];?>" data-cid="<?=$cid;?>" data-tid="<?=$tid;?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; color: #fff;"></button>
 	 
 	 </div>	 
 	 <div class="clearfix"></div>
@@ -218,7 +220,7 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_trivia WHERE cid='$tid' O
 			<div style="width:60%; float:left; font-size:11px;">
 <?php
 if($tid!='') {	
-$sql = mysqli_query($con,"SELECT COUNT(*) AS crt from erga_glossary_trivia WHERE cid='$tid' LIMIT $rowsPerPageTV"); 
+$sql = mysqli_query($con,"SELECT COUNT(*) AS crt from erga_glossary_trivia WHERE tid='$tid' LIMIT $rowsPerPageTV"); 
 													 
 $row = mysqli_fetch_assoc($sql);
 $totalPagesTV = ceil($row['crt'] / $rowsPerPageTV);
@@ -368,6 +370,18 @@ $(document).on("click","#trivia",function() {
 	$(".modcap").append('Glossary Trivia Record');
 	$('#CTR').modal('show');
 });	
+	
+$(document).on("click",".edtrv",function() {
+	var id=$(this).data('id');
+	var cid=$(this).data('cid');
+	var tid=$(this).data('tid');
+	$('#contentv').empty();
+	$("#contentv").load('create_trivia.php?id='+id+'&cid='+cid+'&tid='+tid+'&mde=UT');
+	$('.modwidth').css('width','55%');
+	$('.modcap').empty();
+	$(".modcap").append('Glossary Trivia Record');
+	$('#CTR').modal('show');
+});		
 	
 $(document).on("click","#editor",function() {
 	 window.open('https://docs.google.com/presentation/u/0/','_blank');

@@ -6,7 +6,7 @@ error_reporting (E_ALL ^ E_NOTICE);
 @$a = $xyz / 0;
 
 $id=$_REQUEST['id'];
-$dsql = mysqli_query($con,"SELECT id, flink FROM erga_glossary_avp WHERE id = '$id'");
+$dsql = mysqli_query($con,"SELECT id, flink FROM erga_glossary_ppt WHERE id = '$id'");
 
   while($r = mysqli_fetch_assoc($dsql))
    {  $flink = $r['flink'];  }

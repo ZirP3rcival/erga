@@ -5,22 +5,23 @@ session_start();
 error_reporting (E_ALL ^ E_NOTICE); 
 @$a = $xyz / 0;
 
-$fid=$_SESSION['id'];
+$id=$_SESSION['id'];
 $cid=$_REQUEST['cid'];
 $tid=$_REQUEST['tid'];
 $mde=$_REQUEST['mde'];
 
 if($mde=='UT') {
-	$id=$_REQUEST['id']; 
-	$csql = mysqli_query($con,"SELECT * FROM erga_glossary_trivia WHERE id='$id'"); 
+	$uid=$_REQUEST['id']; 
+	$csql = mysqli_query($con,"SELECT * FROM erga_glossary_trivia WHERE id='$uid'"); 
 	  while($r = mysqli_fetch_assoc($csql))
 	   {
-		   	$qst=$r['qst'];
-		    $qa1=$r['qa1'];
-		    $qa2=$r['qa2'];
-		    $qa3=$r['qa3'];
-		    $qa4=$r['qa4'];
-		    $qky=$r['qky'];
+		   	$qtp=$r['gtype'];
+		    $qst=$r['gquest'];
+		    $qa1=$r['gans1'];
+		    $qa2=$r['gans2'];
+		    $qa3=$r['gans3'];
+		    $qa4=$r['gans4'];
+		    $qky=$r['gkey'];
 	   }
 }
 ?>
@@ -28,14 +29,14 @@ if($mde=='UT') {
 <div class="card-block box" style="padding: 0px;">
 	<div style="background: #FFF;"> 
  <div class="col-12 col-md-12" style="border-right:1px solid #828080; border-bottom:0px solid #828080; padding:0px;">
-<form action="glossarycontroller.php?prc=<?=$mde?>&cid=<?=$cid?>&tid=<?=$tid?>"  enctype="multipart/form-data"  method="post" style="margin-bottom:0px; width: 100%;" class="form-horizontal" role="form" id="frmTR" >          
+<form action="glossarycontroller.php?prc=<?=$mde?>&cid=<?=$cid?>&tid=<?=$tid?>&uid=<?=$uid?>"  enctype="multipart/form-data"  method="post" style="margin-bottom:0px; width: 100%;" class="form-horizontal" role="form" id="frmTR" >          
 <div class="row" style="margin-left: 10px; margin-right: 10px;">
 	<div class="col-xs-12 col-md-12" style="padding-left: 0px; padding-top: 15px; float: left; color:#000; font-size: 14px;"> Assessment Type : </div>
 	<div class="col-xs-12 col-md-12" style="padding-right: 0px;padding-left: 0px;">
 	<select name="gtype" required class="form-control" id="gtype" style="display: inline-block; position:inherit; width:100%;" title="Select Category">
 	<option value="" >- Select  Type-</option> 
-		<option value="0">Pre - Assessment</option>  
-		<option value="1">Post - Assessment</option>  
+		<option value="0" <?=($qtp == 0 ? 'selected' : '');?>>Pre - Assessment</option>  
+		<option value="1" <?=($qtp == 1 ? 'selected' : '');?>>Post - Assessment</option>  
 	</select>
     </div> 
 <div class="clearfix"></div>

@@ -6,7 +6,7 @@ error_reporting (E_ALL ^ E_NOTICE);
 @$a = $xyz / 0;
 
 $id=$_REQUEST['id'];
-$sqlay="SELECT * FROM erga_glossary_avp WHERE id='$id'"; 
+$sqlay="SELECT * FROM erga_glossary_ppt WHERE id='$id'"; 
 $sqler = $con->query($sqlay);	
 while($r = mysqli_fetch_assoc($sqler)) {
 	$title = $r['title'];
