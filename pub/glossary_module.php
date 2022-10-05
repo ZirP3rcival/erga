@@ -9,10 +9,13 @@ $stype=$_SESSION['accttype'];
 $fid=$_SESSION['id'];
 $cid=$_POST['category'];
 $tid=$_REQUEST['tid'];
-$dsp = 'none';
-
+$ua=$_REQUEST['ua'];
+$dsp = 'none'; $udsp = 'none';
+$wth='col-lg-12';
 if($cid=='') { $cid=$_REQUEST['cid']; }
-if($tid!='') { $dsp='block'; }
+if(($ua=='')&&($tid!='')) { $dsp='block'; $udsp='none'; $wth='col-lg-7'; }
+if($ua=='UA') { $dsp='none'; $udsp='block'; $wth='col-lg-7'; }
+
 ?>
 <style>
 .form-control  {
@@ -64,8 +67,8 @@ if($tid!='') { $dsp='block'; }
 </div>
 	</div>
 </div>  
-
-<div class="col-lg-7 col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin-top: 15px;">
+<!-- ########################################################################### -->
+<div class="<?=$wth?> col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin: auto; margin-top: 15px;">
 	<div class="card dash-video">
 		  <div class="card-block card-top login-fm my-acct-title">
 			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #fff!important; text-align: left; padding: 15px;">
@@ -109,13 +112,14 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_ppt WHERE fid='$fid' $byt
 <li class="list-group-item" style="padding: 5px 15px; font-size: 14px; color: #000;">
 	<div class="row">
 	<div class="col-xs-12 col-md-7" style="padding-bottom: 0px; padding-right: 0px;"><?=$rx['title'];?></div>
-    <div class="col-xs-12 col-md-5" style="padding-bottom: 0px; padding-right: 0px;">
+    <div class="col-xs-12 col-md-5" style="padding: 0px;">
 	 
 	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=D&cid=<?=$cid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
 
 	 <button class="btn btn-warning fa fa-edit" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Update this Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; color: #fff;"></button>
-
-	 <button class="btn btn-default fa fa-upload" id="editls" data-id="<?=$rx['id'];?>" data-tle="<?=$rx['title'];?>" title="Uploads Additional Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; background: #6A76D2; color: #fff;"></button>
+	 
+	 <a href="?page=glossary_module&cid=<?=$cid?>&tid=<?=$rx['id']?>&ua=UA" class="trash" onclick="return confirm('Upload Additional Record?')">
+	 <button class="btn btn-default fa fa-upload" id="upAR" data-id="<?=$rx['id'];?>" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; background: #6A76D2; color: #fff;"></button></a>
 
 	 <a href="?page=glossary_module&cid=<?=$cid?>&tid=<?=$rx['id']?>" class="trash" onclick="return confirm('View Trivia Record?')"><button class="btn btn-info fa fa-list-alt trivia" title="Create Trivia Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
 	 	 
@@ -167,13 +171,15 @@ if($currentPageRV < $totalPagesRV)
 </div> 
 </div> 
 </div>   
-
-<div class="col-lg-5 col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin-top: 15px;">
+<!-- ########################################################################### -->
+<div id="GTC" class="col-lg-5 col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin-top: 15px; display: <?=$dsp;?>">
 	<div class="card dash-video">
 		  <div class="card-block card-top login-fm my-acct-title">
 			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #fff!important; text-align: left; padding: 15px;">
 			 <span class="fa fa-list" style="margin-right: 15px; font-size: 2em;"></span>Glossary Trivia Content
-			 	 <button class="btn btn-success fa fa-save" id="trivia" data-cid="<?=$cid;?>" data-tid="<?=$tid;?>" title="Create Trivia Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px; display: <?=$dsp;?>"></button>
+		 		 <a href="faculty?page=glossary_module" class="trash" style="margin-right:10px;" onclick="return confirm('Cancel Trivia Content Module?')">
+			 	 <button class="btn btn-danger fa fa-close" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
+			 	 <button class="btn btn-success fa fa-save" id="trivia" data-cid="<?=$cid;?>" data-tid="<?=$tid;?>" title="Create Trivia Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>
 			 </h4>
 		  </div>
   
@@ -216,7 +222,7 @@ $dsql = mysqli_query($con,"SELECT * from erga_glossary_trivia WHERE tid='$tid' O
  <?php } } ?>
 </div>   
 <div style="float: left; width: 100%; margin-bottom: 10px;">
-			<div style="float: left; margin-right: 10px;"><a class="btn btn-default btn-sm" style="margin-left:2px; font-weight:bold; color:#000; font-size:11px; background:#EFEFEF;" href="?page=glossary_module&prc=<?=$prc;?>&cid=<?=$cid;?>&ppageTV=<?=($currentPageTV-1)?>"> prev </a></div>
+			<div style="float: left; margin-right: 10px;"><a class="btn btn-default btn-sm" style="margin-left:2px; font-weight:bold; color:#000; font-size:11px; background:#EFEFEF;" href="?page=glossary_module&prc=<?=$prc;?>&cid=<?=$cid;?>&ua=<?=$ua;?>&ppageTV=<?=($currentPageTV-1)?>"> prev </a></div>
 			<div style="width:60%; float:left; font-size:11px;">
 <?php
 if($tid!='') {	
@@ -226,7 +232,7 @@ $row = mysqli_fetch_assoc($sql);
 $totalPagesTV = ceil($row['crt'] / $rowsPerPageTV);
 
 if($currentPageTV > 1) 
-{ echo '<a style="margin-left:2px; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ppageTV='.($currentPageTV-1).'"></a>'; }
+{ echo '<a style="margin-left:2px; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ua='.$ua.'&ppageTV='.($currentPageTV-1).'"></a>'; }
 
 if($totalPagesTV < $rowsPerPageTV) { $d=$totalPagesTV; }
 else { $d=$currentPageTV + $rowsPerPageTV; }
@@ -241,23 +247,112 @@ for ($x=1;$x<=$d;$x++)
    }
   else
    { 
-	 echo '<a class="btn btn-default btn-sm" style="background:#162831; margin-left:2px; color:#fff; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ppageTV='.$x.'"><strong>'.$x.'</strong></a>';    }
+	 echo '<a class="btn btn-default btn-sm" style="background:#162831; margin-left:2px; color:#fff; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ua='.$ua.'&ppageTV='.$x.'"><strong>'.$x.'</strong></a>';    }
 }
  echo '<span style="margin-left:2px; color:#666; font-size:12px;"> .... <strong>'. $totalPagesTV .'</strong> pages</span>'; 
 
 if($currentPageTV < $totalPagesTV) 
-{ echo '<a style="margin-left:2px; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ppageTV='.($currentPageTV+1).'"></a>'; } 
+{ echo '<a style="margin-left:2px; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ua='.$ua.'&ppageTV='.($currentPageTV+1).'"></a>'; } 
 }
 ?>
 			</div>
-			<div style="float: right; margin-right: 5px;"><a class="btn btn-default btn-sm" style="font-size:11px; margin-left:2px; font-weight:bold; color:#000; background:#EFEFEF;" href="?page=glossary_module&cid=<?=$cid;?>&ppageTV=<?=($currentPageTV+1);?>"> next </a></div>
+			<div style="float: right; margin-right: 5px;"><a class="btn btn-default btn-sm" style="font-size:11px; margin-left:2px; font-weight:bold; color:#000; background:#EFEFEF;" href="?page=glossary_module&cid=<?=$cid;?>&ua=<?=$ua;?>&ppageTV=<?=($currentPageTV+1);?>"> next </a></div>
 <div class="clearfix"></div>	        
 </div>	
 
 </div> 
 </div> 
 </div>             
-           
+<!-- ########################################################################### -->  
+<div id="GAR" class="col-lg-5 col-xs-12 my-acct-box mg-tb-31" style="padding: 0px; margin-top: 15px; display: <?=$udsp;?>">
+	<div class="card dash-video">
+		  <div class="card-block card-top login-fm my-acct-title">
+			 <h4 class="text-white card-title" style="margin-bottom: 0px; color: #fff!important; text-align: left; padding: 15px;">
+			 <span class="fa fa-list" style="margin-right: 15px; font-size: 2em;"></span>Glossary Attachments Record
+		 	    <a href="faculty?page=glossary_module" class="trash" style="margin-right:10px;" onclick="return confirm('Cancel Uploading Attachment?')">
+			 	 <button class="btn btn-danger fa fa-close" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
+			 	 <button class="btn btn-success fa fa-save" id="arupl" data-cid="<?=$cid;?>" data-tid="<?=$tid;?>" title="Upload Attachment Record" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button>			 	 
+			 </h4>
+		  </div>
+  
+<div class="card-block" style="margin: 0px 15px; background: #fff; padding: 0px 15px; margin-bottom: 15px;">
+<div class="list-group" style="margin-bottom: 15px;">
+<li class="list-group-item" style="font-weight: 600; font-size: 12px;">
+	<div class="row">
+		<div class="col-xs-2 col-md-12" style="padding-bottom: 0px; padding-right: 0px; color: #000;">Glossary Attachment List</div>
+		<div class="clearfix"></div>
+	</div>
+</li>
+<?php 
+if($tid!='') {	
+$rowsPerPageAR = 5;
+$currentPageAR = ((isset($_GET['ppageAR']) && $_GET['ppageAR'] > 0) ? (int)$_GET['ppageAR'] : 1);
+$offsetAR = ($currentPageAR-1)*$rowsPerPageAR;
+$cp=$currentPageAR;
+	
+$dsql = mysqli_query($con,"SELECT * from erga_glossary_attach WHERE tid='$tid' ORDER BY id ASC LIMIT $offsetAR, $rowsPerPageAR");
+	
+  while($rx = mysqli_fetch_assoc($dsql))
+   { $ft=$rx['atype'];  if($ft=='I') { $typ='IMG'; } else  { $typ='VID'; }
+    ?>                                   
+<li class="list-group-item" style="padding: 5px 15px; font-size: 14px; color: #000;">
+	<div class="row">
+	<div class="col-xs-12 col-md-2" style="padding-bottom: 0px; padding-right: 0px; padding-left: 10px; font-size: 10px; font-weight: 600;"><?=$ftyp;?></div>
+    <div class="col-xs-12 col-md-5" style="padding-bottom: 0px; padding-right: 0px;"><?=$quest;?>...</div>
+    <div class="col-xs-12 col-md-5" style="padding-bottom: 0px; padding-right: 0px;">
+	 
+	 <a href="glossarycontroller?id=<?=$rx['id'];?>&prc=DT&cid=<?=$cid?>&tid=<?=$tid?>" class="trash" style="margin-right:10px;" title="Delete this Record" onclick="return confirm('Delete this Record?')"><button class="btn btn-danger fa fa-trash-o" style="float: right; margin-right: 5px; font-size: 18px; padding: 0px 6px;"></button></a>
+	 
+	 </div>	 
+	 <div class="clearfix"></div>
+	 </div>
+ </li>
+
+ <?php } } ?>
+</div>   
+<div style="float: left; width: 100%; margin-bottom: 10px;">
+			<div style="float: left; margin-right: 10px;"><a class="btn btn-default btn-sm" style="margin-left:2px; font-weight:bold; color:#000; font-size:11px; background:#EFEFEF;" href="?page=glossary_module&prc=<?=$prc;?>&cid=<?=$cid;?>&ua=<?=$ua;?>&ppageAR=<?=($currentPageAR-1)?>"> prev </a></div>
+			<div style="width:60%; float:left; font-size:11px;">
+<?php
+if($tid!='') {	
+$sql = mysqli_query($con,"SELECT COUNT(*) AS crt from erga_glossary_trivia WHERE tid='$tid' LIMIT $rowsPerPageAR"); 
+													 
+$row = mysqli_fetch_assoc($sql);
+$totalPagesAR = ceil($row['crt'] / $rowsPerPageAR);
+
+if($currentPageAR > 1) 
+{ echo '<a style="margin-left:2px; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ua='.$ua.'&ppageAR='.($currentPageAR-1).'"></a>'; }
+
+if($totalPagesAR < $rowsPerPageAR) { $d=$totalPagesAR; }
+else { $d=$currentPageAR + $rowsPerPageAR; }
+
+if($d > $totalPagesAR) { $d=$totalPagesAR; }
+else { $d=$totalPagesAR; }
+
+for ($x=1;$x<=$d;$x++)
+{  if ($cp==$x) 
+   { 
+	 echo '<a class="btn btn-default btn-sm" style="background:#4850D3; margin-left:2px; font-size:11px; color:#FFF;"><strong>'.$x.'</strong></a>'; 
+   }
+  else
+   { 
+	 echo '<a class="btn btn-default btn-sm" style="background:#162831; margin-left:2px; color:#fff; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ua='.$ua.'&ppageAR='.$x.'"><strong>'.$x.'</strong></a>';    }
+}
+ echo '<span style="margin-left:2px; color:#666; font-size:12px;"> .... <strong>'. $totalPagesAR .'</strong> pages</span>'; 
+
+if($currentPageAR < $totalPagesAR) 
+{ echo '<a style="margin-left:2px; font-size:11px;" href="?page=glossary_module&cid='.$cid.'&ua='.$ua.'&ppageAR='.($currentPageAR+1).'"></a>'; } 
+}
+?>
+			</div>
+			<div style="float: right; margin-right: 5px;"><a class="btn btn-default btn-sm" style="font-size:11px; margin-left:2px; font-weight:bold; color:#000; background:#EFEFEF;" href="?page=glossary_module&cid=<?=$cid;?>&ua=<?=$ua;?>&ppageAR=<?=($currentPageAR+1);?>"> next </a></div>
+<div class="clearfix"></div>	        
+</div>	
+
+</div> 
+</div> 
+</div>             
+<!-- ########################################################################### -->          
             </div>           
         </div>
     </div>
@@ -316,6 +411,25 @@ if($currentPageTV < $totalPagesTV)
   </div>
 </div>
 <!-- ############################################################################################ -->
+<!-- ######################################## UPLOAD GLOSSARY RECORD ################################### -->
+<div class="modal fade" id="UAR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+    <div class="modal-content">
+      <div class="modal-header login-fm" style="color:#fff;">
+       <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF; width: 100%; padding: 0px; font-weight: 700;">Glossary Attachment Module
+       </h4>
+      </div>   
+<div class="modal-body" id="contentu">        
+
+</div>
+<div class="modal-footer col-xs-12 col-md-12 login-fm" style="margin-top:0px;  color:#fff;font-size: 12px; padding: 10px 15px;">
+ <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px;" form="frmAR"/>Update</button>
+ <button type="button" class="btn btn-default" data-dismiss="modal" style="font-size: 12px;">Close</button>
+</div>
+    </div>
+  </div>
+</div>
+<!-- ############################################################################################ -->
 <!-- ######################################## CREATE TRIVIA RECORD ################################### -->
 <div class="modal fade" id="CTR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" >
@@ -358,7 +472,7 @@ $(document).on("click","#editls",function() {
 	$('.modcap').empty();
 	$(".modcap").append('Update Lesson Record');
 	$('#ULM').modal('show');
-});	
+});		
 	
 $(document).on("click","#trivia",function() {
 	var cid=$(this).data('cid');
@@ -369,6 +483,15 @@ $(document).on("click","#trivia",function() {
 	$('.modcap').empty();
 	$(".modcap").append('Glossary Trivia Record');
 	$('#CTR').modal('show');
+});	
+	
+$(document).on("click","#arupl",function() {
+	var cid=$(this).data('cid');
+	var tid=$(this).data('tid');
+	$('#contentu').empty();
+	$("#contentu").load('glossary_attachment.php?cid='+cid+'&tid='+tid);
+	$('.modwidth').css('width','55%');
+	$('#UAR').modal('show');
 });	
 	
 $(document).on("click",".edtrv",function() {

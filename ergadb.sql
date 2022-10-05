@@ -30,20 +30,20 @@ CREATE TABLE `erga_category_list` (
 
 insert  into `erga_category_list`(`id`,`category`) values (1,'RESEARCH METHOD'),(2,'STATISTICS'),(4,'COMPUTER');
 
-/*Table structure for table `erga_glossary_` */
+/*Table structure for table `erga_glossary_attach` */
 
-DROP TABLE IF EXISTS `erga_glossary_`;
+DROP TABLE IF EXISTS `erga_glossary_attach`;
 
-CREATE TABLE `erga_glossary_` (
+CREATE TABLE `erga_glossary_attach` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `tid` int(10) DEFAULT NULL,
-  `attch` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `attch` varchar(300) CHARACTER SET latin1 DEFAULT NULL,
   `atype` char(1) DEFAULT 'I',
   PRIMARY KEY (`id`),
   KEY `mid` (`tid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-/*Data for the table `erga_glossary_` */
+/*Data for the table `erga_glossary_attach` */
 
 /*Table structure for table `erga_glossary_ppt` */
 
