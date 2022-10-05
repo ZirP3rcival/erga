@@ -9,7 +9,7 @@
 		<div class="single-blog dash-video">
 			<a href="#"><h4>Home Audio Recording <br>
 			For Everyone</h4></a>
-			<video width="270" height="220" controls loop>
+			<video width="100%" height="220" controls loop>
 			  <source src="../img/king and queen of hearts.mp4" type="video/mp4">
 			  <source src="../img/king and queen of hearts.ogg" type="video/ogg">
 			</video>
@@ -17,18 +17,10 @@
 		<div class="single-blog dash-video">
 			<a href="#"><h4>Home Audio Recording <br>
 			For Everyone</h4></a>
-			<video width="270" height="220" controls loop>
+			<video width="100%" height="220" controls loop>
 			  <source src="../img/king and queen of hearts.mp4" type="video/mp4">
 			  <source src="../img/king and queen of hearts.ogg" type="video/ogg">
 			</video>
-		</div>
-		<div class="single-blog dash-video">
-			<a href="#"><h4>Home Audio Recording <br>
-			For Everyone</h4></a>
-			<video width="270" height="220" controls loop>
-			  <source src="../img/king and queen of hearts.mp4" type="video/mp4">
-			  <source src="../img/king and queen of hearts.ogg" type="video/ogg">
-			</video>
-		</div>				
+		</div>			
 	</div>
 </div>	

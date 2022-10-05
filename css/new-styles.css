@@ -162,6 +162,13 @@ p {
 }
 
 
+@media (max-width: 414px) {
+.post-list .single-post.flex-row {
+    flex-direction: column !important;
+    display: contents!important;
+	} 
+}
+
 @media (min-width: 1200px){
 .container {
     max-width: 1320px!important;
