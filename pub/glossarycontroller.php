@@ -170,4 +170,22 @@ $sql="DELETE FROM erga_glossary_trivia WHERE id='$id'";
      exit;
   }  
 }
+
+if ($prc=='DA') {		
+$id = mysqli_real_escape_string($con,$_REQUEST['id']);	
+$cid = mysqli_real_escape_string($con,$_REQUEST['cid']);
+$tid = mysqli_real_escape_string($con,$_REQUEST['tid']);		
+$sql="DELETE FROM erga_glossary_attach WHERE id='$id'";  
+ if (!mysqli_query($con,$sql))
+  { $_SESSION['errmsg']='Error Deleting Glossary Attachment Record!!!'; 
+	echo $sql;
+    header("location:faculty?page=glossary_module&cid=$cid&tid=$tid&ua=UA");
+    exit;
+  }
+ else  
+   { $_SESSION['errmsg']='Glossary Attachment Record Deleted Successfully!!!'; 
+     header("location:faculty?page=glossary_module&cid=$cid&tid=$tid&ua=UA");
+     exit;
+  }  
+}
 ?>

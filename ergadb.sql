@@ -41,9 +41,11 @@ CREATE TABLE `erga_glossary_attach` (
   `atype` char(1) DEFAULT 'I',
   PRIMARY KEY (`id`),
   KEY `mid` (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `erga_glossary_attach` */
+
+insert  into `erga_glossary_attach`(`id`,`tid`,`attch`,`atype`) values (1,7,'parekoy.png','I'),(2,7,'https://www.youtube.com/watch?v=5DS-DvZGV-M','V'),(3,7,'https://www.youtube.com/watch?v=K74_FNnlIF8','V'),(4,7,'xampp.png','I');
 
 /*Table structure for table `erga_glossary_ppt` */
 

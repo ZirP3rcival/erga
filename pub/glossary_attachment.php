@@ -10,30 +10,40 @@ $tid=$_REQUEST['tid'];
 ?>     
 <link rel="stylesheet" type="text/css" href="../uploader/css/dropzone.css"/>
 <script type="text/javascript" src="../uploader/js/dropzone.js"></script>
-<form action="glossarycontroller.php?prc=S&cid=<?=$cid?>" method="post" class="form-horizontal" id="frmAR" name="frmAR" style="margin:0px; padding:0px 12px;" role="form">
+<!--<form action="glossarycontroller.php?prc=S&cid=<=$cid?>" method="post" class="form-horizontal" id="frmAR" name="frmAR" style="margin:0px; padding:0px 12px;" role="form">-->
                       <div class="form-group">
-                        <label for="username">Attachment Type :</label>
-							<select name="acat" required class="form-control" id="acat" style="display: inline-block; position:inherit; width:100%;" form="frmslst" title="Select Category">
-								<option value="" >- Select -</option>
+							<select name="acat" required class="form-control" id="acat" style="display: inline-block; position:inherit; width:100%; margin-top: 15px;" form="frmslst" title="Select Category">
+								<option value="" >- Select Attachment Type-</option>
 								<option value="I">Attach Photo Files</option> 
 								<option value="V">Attach Video Links</option> 
 							</select>
                       </div>
                       <div id="apic" class="form-group" style="display: none;">
                         <label for="username">Browse Photo :</label>
-									<div class="file_upload">
-										<form action="sliderupload.php?prc=I" class="dropzone">
-											<div class="dz-message needsclick">
-												<strong style="font-size: 24px;">Drop Files Here<br>or<br>Click to Upload.</strong><br /><span>Maximum Filesize: 1.5Mb only</span>
-											</div>
-										</form>		
-									</div>
+						<div class="card-body" style="padding: 0px;">
+								<div class="row" style="margin:0px;"> 
+									<div class="col-12 col-md-12" style="padding: 0px;">
+										<div class="file_upload">
+											<form id="frmimg" action="glossaryuploader.php?prc=I&tid=<?=$tid?>" class="dropzone">
+												<div class="dz-message needsclick">
+													<strong style="font-size: 24px;">Drop Image Files Here<br>or<br>Click to Upload.</strong><br /><span>Maximum Filesize: 1.5Mb only</span>
+												</div>
+											</form>		
+										</div>	 
+									 </div>
+									<div class="clearfix"></div>
+								</div>
+						</div>
                       </div>
                       <div id="avid" class="form-group" style="display: none;">
+                       <form id="frmvid" action="glossaryuploader.php?prc=V&cid=<?=$cid?>&tid=<?=$tid?>" method="POST" style="padding: 15px 10px;">
                         <label for="username">Paste Video Link :</label>
                         <textarea name="flink" type="text" class="form-control" id="flink" rows="5"  required></textarea>
+                        <button type="submit" class="btn btn-success" id="submit" name="submit" style="font-size: 12px; margin-top: 15px; float: right;" form="frmvid"/>Submit</button>
+                        <div class="clearfix"></div>
+                        </form>
                       </div>                         
-</form>
+<!--</form>-->
 <!-- ############################################################################################ -->
 <script>
 $(document).ready(function(){
@@ -47,6 +57,7 @@ var tp = $('#acat').val();
 	else if(tp=='V') {
 		$("#apic").hide();
 		$("#avid").show();
+	//	$('#frmvid').attr('action', 'glossaryuploader.php?prc=V');
 	}
 });	
 	
