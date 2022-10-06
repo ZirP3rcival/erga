@@ -48,6 +48,11 @@ $cssString.= '.modal-header { background: '.$thm1.'; }';
 </style>
 
 <?php 
+$tsearch=$_SESSION['search'];
+
+if($tsearch=='') {  $dashboard = 'dashboard_admin';   }
+else if($tsearch!='') {  $dashboard = 'search_result';  }
+
 if($stype=='') {
 ?>
  <header id="header" id="home">
@@ -58,7 +63,7 @@ if($stype=='') {
 	    </div>
 	    <nav id="nav-menu-container">
 	      <ul class="nav-menu">
-	        <li class="menu-active"><a class="ticker-btn" href="#">Home</a></li>
+	        <li class="menu-active"><a class="ticker-btn" href="<?=$dashboard?>">Home</a></li>
 <!--	        <li><a class="ticker-btn" href="about-us.html">About Us</a></li>-->
 	        <li class="menu-has-children"><a class="ticker-btn" href="#">Category</a>
 	          <ul class="popul">
@@ -87,7 +92,7 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	    </div>
 	    <nav id="nav-menu-container">
 	      <ul class="nav-menu">
-	        <li class="menu-active"><a class="ticker-btn" href="?page=dashboard_admin">Home</a></li>
+	        <li class="menu-active"><a class="ticker-btn" href="?page=<?=$dashboard?>">Home</a></li>
 	        <li class="menu-has-children"><a class="ticker-btn" href="#">System Records</a>
 	          <ul class="popul">
 					<li><a class="ticker-btn" href="?page=accounts_settings" id="accmod">Accounts Module</a></li>
@@ -114,7 +119,7 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	    </div>
 	    <nav id="nav-menu-container">
 	      <ul class="nav-menu">
-	        <li class="menu-active"><a class="ticker-btn" href="?page=dashboard_admin">Home</a></li>
+	        <li class="menu-active"><a class="ticker-btn" href="?page=<?=$dashboard?>">Home</a></li>
 			<li><a class="ticker-btn" href="?page=glossary_module" id="cmod">Contents Module</a></li>
 	        <li><a class="ticker-btn" href="logout" id="logout">Logout</a></li>		 
 	        <li> 
@@ -135,7 +140,7 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	    </div>
 	    <nav id="nav-menu-container">
 	      <ul class="nav-menu">
-	        <li class="menu-active"><a class="ticker-btn" href="#">Home</a></li>
+	        <li class="menu-active"><a class="ticker-btn" href="?page=<?=$dashboard?>">Home</a></li>
 <!--	        <li><a class="ticker-btn" href="about-us.html">About Us</a></li>-->
 	        <li class="menu-has-children"><a class="ticker-btn" href="#">Category</a>
 	          <ul class="popul">

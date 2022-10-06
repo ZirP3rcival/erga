@@ -1,7 +1,5 @@
 			<!-- start banner Area -->
-<?php 
-include_once('topicsearch.php');
-?>  				
+<?php include_once('topicsearch.php');?>  				
 			<!-- End banner Area -->
 			<!-- Start post Area -->
 <section class="post-area section-gap">
@@ -9,7 +7,7 @@ include_once('topicsearch.php');
 	<h1 class="text-white lpage" style="margin-bottom: 30px;">Random Information</h1>				
 		<div class="row justify-content-center d-flex">
 			<div class="col-lg-8 post-list">					
-				<?php include_once('randomtopic.php');?>  		
+				<?php include_once('search_topic.php');?>  		
 			</div>			
 			<div class="col-lg-4 sidebar">	
 				<?php include_once('infogallery.php');?>  						

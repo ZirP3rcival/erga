@@ -10,7 +10,7 @@ iframe {
 }	
 </style>	
 <div class="single-slidebar">
-	<h4 style="margin-bottom: 20px;">Informative Videos</h4>
+	<h4 style="margin-bottom: 20px;">Referrence Videos</h4>
 	<div class="blog-list">
 <?php 
 include ('connection.php');
@@ -26,10 +26,15 @@ function convertYoutube($string) {
         $string
     );
 }		
-		
-$dsql = mysqli_query($con,"SELECT erga_glossary_attach.*, erga_glossary_ppt.id, erga_glossary_ppt.`title` FROM erga_glossary_attach 
-INNER JOIN erga_glossary_ppt ON erga_glossary_ppt.id = erga_glossary_attach.tid
-WHERE erga_glossary_attach.atype='V' ORDER BY RAND() ASC LIMIT 2");
+
+$tsearch=$_SESSION['search'];
+
+if($tsearch=='') {  
+		$dsql = mysqli_query($con,"SELECT erga_glossary_attach.*, erga_glossary_ppt.id, erga_glossary_ppt.`title` FROM erga_glossary_attach INNER JOIN erga_glossary_ppt ON erga_glossary_ppt.id = erga_glossary_attach.tid WHERE erga_glossary_attach.atype='V' ORDER BY RAND() ASC LIMIT 2");
+}
+else if($tsearch!='') {  
+		$dsql = mysqli_query($con,"SELECT erga_glossary_attach.*, erga_glossary_ppt.id, erga_glossary_ppt.`title` FROM erga_glossary_attach INNER JOIN erga_glossary_ppt ON erga_glossary_ppt.id = erga_glossary_attach.tid WHERE erga_glossary_attach.atype='V' ORDER BY RAND() ASC LIMIT 2");
+}
 
   while($r = mysqli_fetch_assoc($dsql))
    {  $attch = $r['attch'];  

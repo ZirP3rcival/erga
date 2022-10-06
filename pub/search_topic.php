@@ -11,15 +11,16 @@ include ('connection.php');
 session_start(); 
 error_reporting (E_ALL ^ E_NOTICE); 
 @$a = $xyz / 0;
+$tsearch=$_SESSION['search'];
+$dsql = mysqli_query($con,"SELECT * from erga_glossary_ppt WHERE title LIKE '%$tsearch%' ORDER BY RAND() ASC LIMIT 2"); 
 
-$dsql = mysqli_query($con,"SELECT * from erga_glossary_ppt ORDER BY RAND() ASC LIMIT 2"); 
   while($r = mysqli_fetch_assoc($dsql))
    {  $flink = $r['flink'];  
 
 preg_match('/src="([^"]+)"/', $flink, $match);
 $url = $match[1];
 ?>
-<div class="single-post d-flex flex-row">
+<div class="col-lg-6 col-xs-12 single-post d-flex flex-row" style="padding: 5px;">
 <div class="container" style="padding: 10px;">
 	<div style="background: #FFF;"> 	
 		<div class="content-slider" style="height: 100%;">

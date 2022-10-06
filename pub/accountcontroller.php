@@ -79,7 +79,7 @@ if($count>0)
 		exit;
 	}	
 	
-$sql="INSERT INTO erga_users_account(lnme, fnme, mnme, eadd, cno, alyas, actv, typ, usr, pwd) VALUES ('$T0','$T1','$T2','$T5','$T4','$T3','Y','STUDENT','$T5',MD5('$T4'))";  echo $sql;
+$sql="INSERT INTO erga_users_account(lnme, fnme, mnme, eadd, cno, alyas, actv, typ, usr, pwd) VALUES ('$T0','$T1','$T2','$T5','$T4','$T3','Y','STUDENT','$T5',MD5('$T4'))";  
  if (!mysqli_query($con,$sql))
   {  
 	$_SESSION['errmsg']='Error Saving New Student Account Record!!!'; 

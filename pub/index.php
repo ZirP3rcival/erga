@@ -3,6 +3,17 @@ ob_start();
 include ('connection.php');
 session_start(); 
 error_reporting (E_ALL ^ E_NOTICE); 
+
+$page = $_REQUEST['page'];
+if($page=='') { $page='search_results'; }
+$wp = $page.'.php';
+unset($_SESSION['search']);
+
+$id=$_SESSION['id'];
+if ($id=='')
+{
+ $_SESSION['errmsg'] ="Please Register / Login Perform Search Operation!!!";
+}
 ?>
 <!DOCTYPE html>
 	<html lang="zxx" class="no-js">
@@ -11,26 +22,8 @@ error_reporting (E_ALL ^ E_NOTICE);
 			<!-- #header -->
 <?php include_once('headermenu.php');?> 			  
 			<!-- #header -->
-
 			<!-- start banner Area -->
-<?php include_once('topicsearch.php');?>  				
-			<!-- End banner Area -->
-			<!-- Start post Area -->
-			<section class="post-area section-gap">
-				<div class="container">
-					<h1 class="text-white lpage" style="margin-bottom: 30px;">Random Information</h1>				
-					<div class="row justify-content-center d-flex">
-<div class="col-lg-8 post-list">					
-	<?php include_once('randomtopic.php');?>  		
-</div>			
-<div class="col-lg-4 sidebar">	
-	<?php include_once('infogallery.php');?>  						
-	<?php include_once('infovideo.php');?>  
-</div> 
-						</div>
-					</div>
-				</div>	
-			</section>
+<?php include_once($wp);?> 	
 			<!-- End post Area -->		
 <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-arrow-up"></i></a>		
