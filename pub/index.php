@@ -9,11 +9,11 @@ if($page=='') { $page='search_results'; }
 $wp = $page.'.php';
 unset($_SESSION['search']);
 
-$id=$_SESSION['id'];
-if ($id=='')
-{
- $_SESSION['errmsg'] ="Please Register / Login Perform Search Operation!!!";
-}
+//$id=$_SESSION['id'];
+//if ($id=='')
+//{
+// $_SESSION['errmsg'] ="Please Register / Login for Better Se!!!";
+//}
 ?>
 <!DOCTYPE html>
 	<html lang="zxx" class="no-js">

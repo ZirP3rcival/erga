@@ -7,6 +7,11 @@
 					Inobasyon Bilang Holistikong Dulog sa Pagapaunlad ng Bokabularyo ng mga Mag-aaral na
 Kumukuha ng Riserts sa SHS Klaster 6				
 				</h1>
+<?php
+$id=$_SESSION['id'];
+if ($id!='')
+{				
+?>				
 				<form action="?" class="serach-form-area">
 					<div class="row justify-content-center form-wrap">
 						<div class="col-lg-12 form-cols">
@@ -17,6 +22,7 @@ Kumukuha ng Riserts sa SHS Klaster 6
 						</div>								
 					</div>						
 				</form>	
+<?php } ?>				
 			</div>											
 		</div>
 	</div>

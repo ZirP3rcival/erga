@@ -75,7 +75,7 @@ $count=mysqli_num_rows($sqldata );
 if($count>0)
 	{ 
 		$_SESSION['errmsg'] ='Record Already Exist!!! Cannot Proceed with Registration...';	
-		header("location:index.php?page=register");
+		header("location:index");
 		exit;
 	}	
 	
@@ -83,13 +83,13 @@ $sql="INSERT INTO erga_users_account(lnme, fnme, mnme, eadd, cno, alyas, actv, t
  if (!mysqli_query($con,$sql))
   {  
 	$_SESSION['errmsg']='Error Saving New Student Account Record!!!'; 
-    header("location:index.php?page=register");
+    header("location:index");
     exit;
   }
  else  
    { 
 	 $_SESSION['errmsg']='New Student Account Record Saved Successfully!!!<br><br>Please Login using the following detail...<br>Username: Email Address<br>Password: Contact No'; 
-     header("location:index.php?page=login");
+     header("location:index");
      exit;
   }   
 }
@@ -125,7 +125,7 @@ while($r = mysqli_fetch_assoc($sql))
 if($ct==0)
 {
 	$_SESSION['errmsg']='Recovery Details Invalid!!!<br>Cannot Proceed with Recovery Request.'; 
-    header("location:index.php?page=recover");
+    header("location:index");
     exit;
 }
  else  
@@ -134,7 +134,7 @@ if($ct==0)
 	 $pwd=MD5($otp); 
 	 $sql0 = mysqli_query($con, "UPDATE erga_users_account SET usr='$T1', pwd='$pwd' WHERE id='$id'");
 	 $_SESSION['errmsg']='Account Recovery Successfull!!!<br><br>Please Login using this details:<br> Username: [Email Address]<br>Password: '.$otp; 
-     header("location:index.php?page=login");
+     header("location:index");
      exit;
   }   
 }

@@ -6,7 +6,7 @@ include_once('topicsearch.php');
 			<!-- Start post Area -->
 <section class="post-area section-gap">
 	<div class="container">
-	<h1 class="text-white lpage" style="margin-bottom: 30px;">Random Information</h1>				
+	<h1 class="text-white lpage" style="margin-bottom: 30px;">Random Informationx</h1>				
 		<div class="row justify-content-center d-flex">
 			<div class="col-lg-8 post-list">					
 				<?php include_once('randomtopic.php');?>  		

@@ -63,19 +63,21 @@ if($stype=='') {
 	    </div>
 	    <nav id="nav-menu-container">
 	      <ul class="nav-menu">
-	        <li class="menu-active"><a class="ticker-btn" href="<?=$dashboard?>">Home</a></li>
+	        <li class="menu-active"><a class="ticker-btn" href="#">Home</a></li>
 <!--	        <li><a class="ticker-btn" href="about-us.html">About Us</a></li>-->
+<!--
 	        <li class="menu-has-children"><a class="ticker-btn" href="#">Category</a>
 	          <ul class="popul">
-<?PHP
+<php
 $sqlay="SELECT * FROM erga_category_list ORDER BY category ASC"; 
 $sqler = $con->query($sqlay);	
 while($r = mysqli_fetch_assoc($sqler)) {				
 ?>	          
-	<li><a class="ticker-btn catlst" href="#"><?=$r['category']?></a></li>
-<?php } ?>
+	<li><a class="ticker-btn catlst" href="#"><=$r['category']?></a></li>
+<php } ?>
 	          </ul>
 	        </li>
+-->
 	        <li><a class="ticker-btn" href="#" id="signup">Signup</a></li>
 	        <li><a class="ticker-btn" href="#" id="login">Login</a></li>	  	        
 	      </ul>
