@@ -15,8 +15,12 @@ $page = $_REQUEST['page'];
 if($page=='') { $page='search_results'; }
 $wp = $page.'.php';
 
-$tsearch = $_REQUEST['search'];
+$tsearch = mysqli_real_escape_string($con,$_REQUEST['search']);
+
 $_SESSION['search']=$tsearch;
+
+if($tsearch=='') { unset($_SESSION['search']); }
+
 ?>
 <!DOCTYPE html>
 	<html lang="zxx" class="no-js">

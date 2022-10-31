@@ -5,7 +5,7 @@ session_start();
 error_reporting (E_ALL ^ E_NOTICE); 
 
 $page = $_REQUEST['page'];
-if($page=='') { $page='search_results'; }
+if($page=='') { $page='dashboard_admin'; }
 $wp = $page.'.php';
 unset($_SESSION['search']);
 

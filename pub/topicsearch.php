@@ -12,7 +12,7 @@ $id=$_SESSION['id'];
 if ($id!='')
 {				
 ?>				
-				<form action="?" class="serach-form-area">
+				<form action="?page=search_results#results" class="serach-form-area">
 					<div class="row justify-content-center form-wrap">
 						<div class="col-lg-12 form-cols">
 							<input type="text" class="form-control" name="search" placeholder="what are you looking for?" style="float: left; width: 94%">

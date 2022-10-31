@@ -51,7 +51,7 @@ $cssString.= '.modal-header { background: '.$thm1.'; }';
 $tsearch=$_SESSION['search'];
 
 if($tsearch=='') {  $dashboard = 'dashboard_admin';   }
-else if($tsearch!='') {  $dashboard = 'search_result';  }
+else if($tsearch!='') {  $dashboard = 'search_results';  }
 
 if($stype=='') {
 ?>
@@ -142,19 +142,21 @@ while($r = mysqli_fetch_assoc($sqler)) {
 	    </div>
 	    <nav id="nav-menu-container">
 	      <ul class="nav-menu">
-	        <li class="menu-active"><a class="ticker-btn" href="?page=<?=$dashboard?>">Home</a></li>
+	        <li class="menu-active"><a class="ticker-btn" href="?page=<?=$dashboard?>">Home<?=$tsearch?></a></li>
 <!--	        <li><a class="ticker-btn" href="about-us.html">About Us</a></li>-->
+<!--
 	        <li class="menu-has-children"><a class="ticker-btn" href="#">Category</a>
 	          <ul class="popul">
-<?PHP
+<PHP
 $sqlay="SELECT * FROM erga_category_list ORDER BY category ASC"; 
 $sqler = $con->query($sqlay);	
 while($r = mysqli_fetch_assoc($sqler)) {				
 ?>	          
 	<li><a class="ticker-btn catlst" href="#"><?=$r['category']?></a></li>
-<?php } ?>
+<php } ?>
 	          </ul>
 	        </li>
+-->
 <!--	        <li><a class="ticker-btn" href="#" id="my_account">My Account</a></li>-->
 	        <li><a class="ticker-btn" href="logout" id="logout">Logout</a></li>		 
 	        <li> 
