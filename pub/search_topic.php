@@ -7,7 +7,7 @@
 
 .tview{
     display: flex;     
-    flex-direction: row;
+    flex-direction: column;  /*row*/
     align-items: stretch;
     justify-content: space-evenly;
     flex-wrap: nowrap
@@ -35,14 +35,14 @@ $cp=$currentPageAR;
 <div class="col-lg-12 col-xs-12 dash-video tview" >
 <?php
 $dsql = mysqli_query($con,"SELECT * from erga_glossary_ppt WHERE title LIKE '%$tsearch%' ORDER BY title ASC"); 
-
+//echo "SELECT * from erga_glossary_ppt WHERE title LIKE '%$tsearch%' ORDER BY title ASC"; exit;
   while($r = mysqli_fetch_assoc($dsql))
-   {  $flink = $r['flink'];  
+   {  $flink = $r['flink'];  $_SESSION['id']=$r['id'];
 
 preg_match('/src="([^"]+)"/', $flink, $match);
 $url = $match[1];
 ?>
-<div class="col-lg-6 col-xs-12 single-post d-flex flex-row" style="padding: 5px; margin: 10px; background: #fff;">
+<div class="col-lg-12 col-xs-12 single-post d-flex flex-row" style="padding: 5px; margin: 10px; background: #fff;">
 <div class="container" style="padding: 10px;">
 	<div style="background: #FFF;"> 	
 		<div class="content-slider" style="height: 100%;">

@@ -4,15 +4,17 @@
 		<div class="row search-page-top d-flex align-items-center justify-content-center">
 			<div class="banner-content col-lg-8">
 				<h1 class="text-white lpage">
-					Inobasyon Bilang Holistikong Dulog sa Pagapaunlad ng Bokabularyo ng mga Mag-aaral na
-Kumukuha ng Riserts sa SHS Klaster 6				
+					Bilang Holistikong Dulog sa Pagapaunlad ng Bokabularyo ng mga Mag-aaral na
+Kumukuha ng Riserts sa SHS Distrito ng Victoria				
 				</h1>
-<?php
+<!--
+<php
 $id=$_SESSION['id'];
 if ($id!='')
 {				
 ?>				
-				<form action="?page=search_results#results" class="serach-form-area">
+-->
+				<form action="?page=search_results#results" class="serach-form-area" method="post">
 					<div class="row justify-content-center form-wrap">
 						<div class="col-lg-12 form-cols">
 							<input type="text" class="form-control" name="search" placeholder="what are you looking for?" style="float: left; width: 94%">
@@ -22,7 +24,7 @@ if ($id!='')
 						</div>								
 					</div>						
 				</form>	
-<?php } ?>				
+<!--<php } ?>				-->
 			</div>											
 		</div>
 	</div>

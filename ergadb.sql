@@ -41,11 +41,11 @@ CREATE TABLE `erga_glossary_attach` (
   `atype` char(1) DEFAULT 'I',
   PRIMARY KEY (`id`),
   KEY `mid` (`tid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `erga_glossary_attach` */
 
-insert  into `erga_glossary_attach`(`id`,`tid`,`attch`,`atype`) values (1,7,'parekoy.png','I'),(2,7,'https://www.youtube.com/watch?v=5DS-DvZGV-M','V'),(3,7,'https://www.youtube.com/watch?v=K74_FNnlIF8','V'),(5,7,'Adult Tricycles.jpg','I'),(6,8,'https://www.youtube.com/watch?v=yVvpC5fZDkQ','V'),(7,8,'UI-Design-Tools-1.jpg.jpg','I'),(8,9,'https://www.youtube.com/watch?v=IDyAQzvHXec','V');
+insert  into `erga_glossary_attach`(`id`,`tid`,`attch`,`atype`) values (1,7,'parekoy.png','I'),(2,7,'https://www.youtube.com/watch?v=5DS-DvZGV-M','V'),(3,7,'https://www.youtube.com/watch?v=K74_FNnlIF8','V'),(5,7,'Adult Tricycles.jpg','I'),(6,8,'https://www.youtube.com/watch?v=yVvpC5fZDkQ','V'),(7,8,'UI-Design-Tools-1.jpg.jpg','I'),(8,9,'https://www.youtube.com/watch?v=IDyAQzvHXec','V'),(9,7,'powder coating.jpg','I'),(10,7,'WIN_20220401_14_47_12_Pro.jpg','I');
 
 /*Table structure for table `erga_glossary_ppt` */
 

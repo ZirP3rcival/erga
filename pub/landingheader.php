@@ -21,6 +21,9 @@
 			<!--
 			CSS
 			============================================= -->
+			<script src="../js/vendor/jquery-2.2.4.min.js"></script>
+			<script src="../js/vendor/bootstrap.min.js"></script>
+			
 			<link rel="stylesheet" href="../css/linearicons.css">
 			<link rel="stylesheet" href="../css/bootstrap.css">
 			<link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -31,6 +34,4 @@
 			<link rel="stylesheet" href="../css/main.css">
 			<link rel="stylesheet" href="../css/new-styles.css">
 			
-			<script src="../js/vendor/jquery-2.2.4.min.js"></script>
-			<script src="../js/vendor/bootstrap.min.js"></script>
 		</head>

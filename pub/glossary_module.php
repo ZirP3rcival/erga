@@ -97,7 +97,7 @@ if($ua=='UA') { $dsp='none'; $udsp='block'; }
 </li>
 <?php 
 
-$rowsPerPageRV = 5;
+$rowsPerPageRV = 15;
 $currentPageRV = ((isset($_GET['ppageRV']) && $_GET['ppageRV'] > 0) ? (int)$_GET['ppageRV'] : 1);
 $offsetRV = ($currentPageRV-1)*$rowsPerPageRV;
 $cp=$currentPageRV;

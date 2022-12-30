@@ -17,14 +17,13 @@ error_reporting (E_ALL ^ E_NOTICE);
 $tsearch=$_SESSION['search'];
 
 if($tsearch=='') {  
-		$dsql = mysqli_query($con,"SELECT erga_glossary_attach.*, erga_glossary_ppt.id, erga_glossary_ppt.`title` FROM erga_glossary_attach 
-		INNER JOIN erga_glossary_ppt ON erga_glossary_ppt.id = erga_glossary_attach.tid
-		WHERE erga_glossary_attach.atype='I' ORDER BY RAND() ASC LIMIT 4");
+		$dsql = mysqli_query($con,"SELECT erga_glossary_attach.* FROM erga_glossary_attach WHERE erga_glossary_attach.atype='I' ORDER BY RAND() ASC LIMIT 4");
 }
 else if($tsearch!='') {  
+	$rid = $_SESSION['id'];
 		$dsql = mysqli_query($con,"SELECT erga_glossary_attach.*, erga_glossary_ppt.id, erga_glossary_ppt.`title` FROM erga_glossary_attach 
 		INNER JOIN erga_glossary_ppt ON erga_glossary_ppt.id = erga_glossary_attach.tid
-		WHERE erga_glossary_attach.atype='I' ORDER BY RAND() ASC LIMIT 4");
+		WHERE erga_glossary_attach.atype='I' AND erga_glossary_attach.tid='$rid' ORDER BY RAND() ASC LIMIT 4");
 }
 
   while($r = mysqli_fetch_assoc($dsql))

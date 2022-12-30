@@ -1,6 +1,8 @@
 			<!-- start banner Area -->
 <?php 
 include_once('topicsearch.php');
+$tsearch = mysqli_real_escape_string($con,$_REQUEST['search']);
+$_SESSION['search']=$tsearch;
 if($tsearch!='') 
 	{ $title='Search Result for `'.$tsearch.'`'; }
 else { $title='Random Information'; }
